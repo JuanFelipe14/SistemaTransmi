@@ -1,0 +1,59 @@
+@startuml
+class controller.GeneralController {
+}
+class controller.BusController {
+- ArrayList<Bus> buses
+}
+class model.Ruta {
+- int codigo
+- ArrayList<String> estaciones
+- String horarios
++ int getCodigo()
++ void setCodigo(int)
++ ArrayList<String> getEstaciones()
++ void setEstaciones(ArrayList<String>)
++ String getHorarios()
++ void setHorarios(String)
+}
+class model.Conductor {
+~ String nombre
+~ int cedula
+~ int telefono
+~ String direccion
+~ ArrayList<Bus> busesAsignados
++ String getNombre()
++ void setNombre(String)
++ int getCedula()
++ void setCedula(int)
++ int getTelefono()
++ void setTelefono(int)
++ String getDireccion()
++ void setDireccion(String)
++ ArrayList<Bus> getBusesAsignados()
++ void setBusesAsignados(ArrayList<Bus>)
+}
+class controller.RutaController {
+- ArrayList<Ruta> rutas
+}
+class model.Bus {
+- String placa
+- String modelo
+- ArrayList<Ruta> rutasAsignadas
++ String getPlaca()
++ void setPlaca(String)
++ String getModelo()
++ void setModelo(String)
++ ArrayList<Ruta> getRutasAsignadas()
++ void setRutasAsignadas(ArrayList<Ruta>)
+}
+enum model.TipoUsuario {
+}
+class controller.ConductorController {
+- ArrayList<Conductor> conductores
+}
+class model.Usuario {
+- UUID idUsuario
+}
+interface InterfaceSystem.IGlobalController {
+}
+@enduml

@@ -1,0 +1,110 @@
+@startuml
+class controller.GeneralController {
+~ ConductorController controladorConductor
+~ RutaController controladorRuta
+~ BusController controladorBus
+~ ArrayList<Usuario> listaUsuarios
+~ ArrayList<Horario> listaHorarios
++ void crearUsuario(TipoUsuario,String,String,Integer)
++ Usuario buscarUsuario(UUID)
++ boolean eliminarUsuario(UUID)
+}
+enum model.DiasSemana {
++  LUNES
++  MARTES
++  MIERCOLES
++  JUEVES
++  VIERNES
++  SABADO
++  DOMINGO
+}
+class model.Ruta {
+- UUID idRuta
+- int codigo
+- ArrayList<String> estaciones
+- String horarios
++ int getCodigo()
++ void setCodigo(int)
++ ArrayList<String> getEstaciones()
++ void setEstaciones(ArrayList<String>)
++ String getHorarios()
++ void setHorarios(String)
+}
+class model.Conductor {
+- UUID idConductor
+~ String nombre
+~ int cedula
+~ int telefono
+~ String direccion
++ String getNombre()
++ void setNombre(String)
++ int getCedula()
++ void setCedula(int)
++ int getTelefono()
++ void setTelefono(int)
++ String getDireccion()
++ void setDireccion(String)
++ ArrayList<Bus> getBusesAsignados()
++ void setBusesAsignados(ArrayList<Bus>)
+}
+class controller.RutaController {
+- ArrayList<Ruta> rutas
+}
+class controller.ConductorController {
+- ArrayList<Conductor> conductores
+}
+class model.Usuario {
+- UUID idUsuario
+- TipoUsuario rol
+- String nombres
+- String apellidos
+- Integer cedula
++ UUID getIdUsuario()
++ void setIdUsuario(UUID)
++ TipoUsuario getRol()
++ void setRol(TipoUsuario)
++ String getNombres()
++ void setNombres(String)
++ String getApellidos()
++ void setApellidos(String)
++ Integer getCedula()
++ void setCedula(Integer)
+}
+class controller.BusController {
+- ArrayList<Bus> buses
+}
+class model.Horario {
+- Bus busHorario
+- Conductor conductorHorario
+- Ruta rutaHorario
+~ ArrayList<DiasSemana> diasHorario
+- UUID idHorario
+- Date horaInicio
+- Date horaFin
++ Bus getBusHorario()
++ void setBusHorario(Bus)
++ Conductor getConductorHorario()
++ void setConductorHorario(Conductor)
++ Ruta getRutaHorario()
++ void setRutaHorario(Ruta)
+}
+class model.Bus {
+- String placa
+- UUID idBus
+- String modelo
++ String getPlaca()
++ void setPlaca(String)
++ String getModelo()
++ void setModelo(String)
++ ArrayList<Ruta> getRutasAsignadas()
++ void setRutasAsignadas(ArrayList<Ruta>)
+}
+enum model.TipoUsuario {
++  ADMINISTRADOR
++  COORDINADOR
++  PASAJERO
+}
+interface InterfaceSystem.IGlobalController {
+~ GeneralController controladorGeneral
+}
+@enduml
