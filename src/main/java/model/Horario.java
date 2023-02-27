@@ -1,18 +1,22 @@
 package model;
 
+import jakarta.persistence.ManyToOne;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
 public class Horario {
+    @ManyToOne
     private Bus busHorario;
+    @ManyToOne
     private Conductor conductorHorario;
+    @ManyToOne
     private Ruta rutaHorario;
 
     ArrayList<DiasSemana> diasHorario;
 
     private UUID idHorario;
-
     private Date horaInicio;
     private Date horaFin;
 

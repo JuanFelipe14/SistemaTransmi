@@ -1,59 +1,149 @@
 @startuml
-class controller.GeneralController {
+class controller.RutaController {
+- ArrayList<Ruta> rutas
+}
+enum model.TipoUsuario {
++  ADMINISTRADOR
++  COORDINADOR
++  PASAJERO
+}
+class service.HorarioService {
+- HorarioRepository horarioRepository
++ List<Horario> getHorarios()
+}
+class service.RutaService {
+~ RutaRepository rutaRepository
++ List<Ruta> listarRutas()
+}
+class service.BusService {
+- BusRepository busRepository
++ List<Bus> listarBuses()
+}
+class controller.HorarioController {
+}
+class model.Usuario {
+- UUID idUsuario
+- TipoUsuario rol
+- String nombres
+- String apellidos
+- Integer cedula
++ UUID getIdUsuario()
++ void setIdUsuario(UUID)
++ TipoUsuario getRol()
++ void setRol(TipoUsuario)
++ String getNombres()
++ void setNombres(String)
++ String getApellidos()
++ void setApellidos(String)
++ Integer getCedula()
++ void setCedula(Integer)
 }
 class controller.BusController {
 - ArrayList<Bus> buses
+- BusService busService
++ String listarPersonas(Model)
 }
 class model.Ruta {
+- Long id
+- UUID idRuta
 - int codigo
 - ArrayList<String> estaciones
 - String horarios
+~ List<Horario> horarioRuta
 + int getCodigo()
 + void setCodigo(int)
 + ArrayList<String> getEstaciones()
 + void setEstaciones(ArrayList<String>)
 + String getHorarios()
 + void setHorarios(String)
++ Long getId()
++ void setId(Long)
++ UUID getIdRuta()
++ void setIdRuta(UUID)
++ List<Horario> getHorarioRuta()
++ void setHorarioRuta(List<Horario>)
+}
+class model.Bus {
+- Long id
+- String placa
+- UUID idBus
+- String modelo
+~ List<Horario> horarioBus
++ Long getId()
++ void setId(Long)
++ UUID getIdBus()
++ void setIdBus(UUID)
++ String getPlaca()
++ void setPlaca(String)
++ String getModelo()
++ void setModelo(String)
+}
+class controller.ConductorController {
+- ArrayList<Conductor> conductores
+}
+interface repository.ConductorRepository {
+}
+enum model.DiasSemana {
++  LUNES
++  MARTES
++  MIERCOLES
++  JUEVES
++  VIERNES
++  SABADO
++  DOMINGO
 }
 class model.Conductor {
-~ String nombre
-~ int cedula
-~ int telefono
-~ String direccion
-~ ArrayList<Bus> busesAsignados
+- Long id
+- String nombre
+- int cedula
+- int telefono
+- String direccion
+- UUID codigo
+~ List<Horario> horarioConductores
++ Long getId()
++ void setId(Long)
 + String getNombre()
 + void setNombre(String)
 + int getCedula()
 + void setCedula(int)
 + int getTelefono()
++ UUID getCodigo()
++ void setCodigo(UUID)
++ List<Horario> getHorarioConductores()
++ void setHorarioConductores(List<Horario>)
 + void setTelefono(int)
 + String getDireccion()
 + void setDireccion(String)
-+ ArrayList<Bus> getBusesAsignados()
-+ void setBusesAsignados(ArrayList<Bus>)
 }
-class controller.RutaController {
-- ArrayList<Ruta> rutas
+class service.ConductorService {
+- ConductorRepository conductorRepository
++ List<Conductor> listarConductores()
 }
-class model.Bus {
-- String placa
-- String modelo
-- ArrayList<Ruta> rutasAsignadas
-+ String getPlaca()
-+ void setPlaca(String)
-+ String getModelo()
-+ void setModelo(String)
-+ ArrayList<Ruta> getRutasAsignadas()
-+ void setRutasAsignadas(ArrayList<Ruta>)
+interface repository.HorarioRepository {
 }
-enum model.TipoUsuario {
+interface repository.BusRepository {
 }
-class controller.ConductorController {
-- ArrayList<Conductor> conductores
+interface repository.RutaRepository {
 }
-class model.Usuario {
-- UUID idUsuario
+class model.Horario {
+- Bus busHorario
+- Conductor conductorHorario
+- Ruta rutaHorario
+~ ArrayList<DiasSemana> diasHorario
+- UUID idHorario
+- Date horaInicio
+- Date horaFin
++ Bus getBusHorario()
++ void setBusHorario(Bus)
++ Conductor getConductorHorario()
++ void setConductorHorario(Conductor)
++ Ruta getRutaHorario()
++ void setRutaHorario(Ruta)
 }
-interface InterfaceSystem.IGlobalController {
-}
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- repository.ConductorRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- repository.HorarioRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- repository.BusRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- repository.RutaRepository
 @enduml
