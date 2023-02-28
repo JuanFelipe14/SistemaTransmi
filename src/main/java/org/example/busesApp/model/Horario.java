@@ -1,10 +1,20 @@
-package model;
+package org.example.busesApp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
 public class Horario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Bus busHorario;
     private Conductor conductorHorario;
     private Ruta rutaHorario;

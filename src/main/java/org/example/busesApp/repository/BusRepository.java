@@ -1,6 +1,6 @@
-package repository;
+package org.example.busesApp.repository;
 
-import model.Bus;
+import org.example.busesApp.model.Bus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BusRepository extends JpaRepository<Bus, Long> {

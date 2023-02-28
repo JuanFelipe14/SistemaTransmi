@@ -1,11 +1,18 @@
-package model;
+package org.example.busesApp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.UUID;
 
+@Entity
 public class Conductor {
 
-    private UUID idConductor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     String nombre;
     int cedula;
@@ -34,7 +41,6 @@ public class Conductor {
     }
 
     public Conductor() {
-        idConductor=UUID.randomUUID();
     }
 
     public Conductor(String nombre, int cedula, int telefono, String direccion, ArrayList<Bus> busesAsignados) {
@@ -43,15 +49,6 @@ public class Conductor {
         this.telefono = telefono;
         this.direccion = direccion;
 
-        idConductor=UUID.randomUUID();
-    }
-
-    public Conductor(UUID idConductor, String nombre, int cedula, int telefono, String direccion, ArrayList<Bus> busesAsignados) {
-        this.idConductor = idConductor;
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.telefono = telefono;
-        this.direccion = direccion;
     }
 
     public void setTelefono(int telefono) {

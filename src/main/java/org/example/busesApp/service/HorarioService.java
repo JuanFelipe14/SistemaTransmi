@@ -1,9 +1,9 @@
-package service;
+package org.example.busesApp.service;
 
-import model.Horario;
+import org.example.busesApp.model.Horario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.HorarioRepository;
+import org.example.busesApp.repository.HorarioRepository;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package service;
+package org.example.busesApp.service;
 
-import model.Bus;
+import org.example.busesApp.model.Bus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.BusRepository;
+import org.example.busesApp.repository.BusRepository;
 
 import java.util.List;
 

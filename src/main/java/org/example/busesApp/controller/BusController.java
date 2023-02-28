@@ -1,11 +1,11 @@
-package controller;
+package org.example.busesApp.controller;
 
-import model.Bus;
+import org.example.busesApp.model.Bus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import service.BusService;
+import org.example.busesApp.service.BusService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,12 @@ public class BusController {
 
     @GetMapping("/list")
     public String listarPersonas(Model model) {
-        List<Bus> persons = busService.listarBuses();
-        model.addAttribute("persons", persons);
-        return "person-list";
+        List<Bus> buses = busService.listarBuses();
+        model.addAttribute("buses", buses);
+        return "listar-buses";
     }
+
+
 
 
 

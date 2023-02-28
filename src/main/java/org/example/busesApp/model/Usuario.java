@@ -1,31 +1,30 @@
-package model;
+package org.example.busesApp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class Usuario {
-    private UUID idUsuario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private TipoUsuario rol;
     private String nombres;
     private String apellidos;
     private Integer cedula;
 
-    public Usuario(UUID idUsuario, TipoUsuario rol, String nombres, String apellidos, Integer cedula) {
-        this.idUsuario = idUsuario;
-        this.rol = rol;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.cedula = cedula;
-    }
 
     public Usuario() {
     }
 
-    public UUID getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(UUID idUsuario) {
-        this.idUsuario = idUsuario;
+    public Usuario(TipoUsuario rol, String nombres, String apellidos, Integer cedula) {
+        this.rol = rol;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
     }
 
     public TipoUsuario getRol() {

@@ -1,6 +1,6 @@
-package controller;
+package org.example.busesApp.controller;
 
-import model.Ruta;
+import org.example.busesApp.model.Ruta;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

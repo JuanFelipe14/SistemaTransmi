@@ -1,4 +1,4 @@
-package model;
+package org.example.busesApp.model;
 
 public enum DiasSemana {
     LUNES,
