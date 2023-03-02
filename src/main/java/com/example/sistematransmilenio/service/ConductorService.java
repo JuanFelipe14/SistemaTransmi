@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.sistematransmilenio.repository.ConductorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConductorService {
@@ -14,5 +15,8 @@ public class ConductorService {
     private ConductorRepository conductorRepository;
 
     public List<Conductor> listarConductores (){return conductorRepository.findAll();}
+
+    public Conductor recuperarConductor(Long id) { return  conductorRepository.findById(id).get();
+    }
 
 }
