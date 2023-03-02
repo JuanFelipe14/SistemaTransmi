@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+
+<h1>Buses</h1>
+
+<table class="bus">
+    <thead>
+    <tr>
+        <th>Placa</th>
+        <th>Modelo</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="p : ${bus}" th:if="${p.placa}">
+        <td th:text="${p.Placa}"></td>
+        <td th:text="${p.Modelo}"></td>
+        <td>
+            <a th:href="@{/bus/save/{id}(id=${p.id})}">Crear bus</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>

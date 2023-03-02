@@ -19,4 +19,15 @@ public class ConductorService {
     public Conductor recuperarConductor(Long id) { return  conductorRepository.findById(id).get();
     }
 
+    public void guardarConductor(Conductor conductor) {
+        conductorRepository.save(conductor);
+    }
+
+    public List<Conductor> buscarPorNombre(String textoBusqueda) {
+        return conductorRepository.findConductorByNameStartingWith(textoBusqueda);
+    }
+
+    public void eliminarConductor(long id ){
+        conductorRepository.deleteById(id);
+    }
 }

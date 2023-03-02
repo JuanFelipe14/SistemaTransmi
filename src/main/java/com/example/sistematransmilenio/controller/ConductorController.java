@@ -11,18 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/conductor")
 public class ConductorController {
     private ArrayList<Conductor> conductores;
+    Logger log = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private ConductorService conductorService;
 
     @GetMapping("/list")
     public String listarConductores(Model model) {
-        List<Conductor> conductores = conductorService.listarConductores();
-        model.addAttribute("conductores", conductores);
+        List<Conductor> conductor = conductorService.listarConductores();
+        model.addAttribute("conductor", conductor);
         return "conductor-list";
     }
 
@@ -36,17 +40,17 @@ public class ConductorController {
     }
 
     @GetMapping("/view/{idConductor}")
-    String verPersona(Model model, @PathVariable("idConductor") Long id) {
+    String verConductor(Model model, @PathVariable("idConductor") Long id) {
         Conductor conductor = conductorService.recuperarConductor(id);
         model.addAttribute("conductor", conductor);
         return "conductor-view";
     }
 
     @GetMapping("/edit-form/{id}")
-    public String formularioEditarPersona(Model model, @PathVariable Long id) {
+    public String formularioEditarConductor(Model model, @PathVariable Long id) {
         Conductor c = conductorService.recuperarConductor(id);
         model.addAttribute("conductor", c);
-        return "person-edit";
+        return "conductor-edit";
     }
 
     @GetMapping("/search")
@@ -59,23 +63,22 @@ public class ConductorController {
             log.info("Buscando conductores cuyo nombre comienza con {}", searchText);
             conductors = conductorService.buscarPorNombre(searchText);
         }
-        model.addAttribute("conductores", conductors);
+        model.addAttribute("conductor", conductors);
         return "conductor-search";
     }
 
-    @GetMapping(value = "/agregar")
+
+    @GetMapping(value = "/add")
     public String agregarConductor(Model model) {
-        model.addAttribute("conductor", new Conductor());
-        return "productos/agregar_producto";
+        Conductor c= new Conductor();
+        model.addAttribute("conductor", c);
+        return "conductor-add";
     }
 
-    /*@PostMapping(value = "/eliminar")
-    public String eliminarConductor(@ModelAttribute Conductor conductor, RedirectAttributes redirectAttrs) {
-        redirectAttrs
-                .addFlashAttribute("mensaje", "Eliminado correctamente")
-                .addFlashAttribute("clase", "warning");
-        productosRepository.deleteById(producto.getId());
-        return "redirect:/productos/mostrar";
-    }*/
+    @GetMapping(value = "/delete/{id}")
+    public String eliminarConductor(@PathVariable Long id) {
+        conductorService.eliminarConductor(id);
+        return "redirect:/conductor/list";
+    }
 
 }

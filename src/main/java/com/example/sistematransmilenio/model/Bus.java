@@ -1,9 +1,7 @@
 package com.example.sistematransmilenio.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,11 +10,15 @@ import java.util.UUID;
 public class Bus {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
+    @Column(name = "placa", nullable = false)
+    @NotBlank(message = "no puede estar en blanco")
     private String placa;
     private UUID idBus;
+
+    @Column(name = "modelo", nullable = false)
+    @NotBlank(message = "no puede estar en blanco")
     private String modelo;
 
     @OneToMany

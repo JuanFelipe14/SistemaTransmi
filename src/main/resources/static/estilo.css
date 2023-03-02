@@ -1,0 +1,24 @@
+.formcontainer {
+    border-style: solid;
+    border-color: blue;
+    padding: 20px;
+    margin: 20px;
+}
+
+.conductor-list {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: black;
+}
+
+.conductor-list td, .conductor-list th {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    padding: 5px
+}
+
+.error {
+    color: red;
+}

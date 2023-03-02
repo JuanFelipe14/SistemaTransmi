@@ -7,15 +7,22 @@
 
 <body>
 
-<h1>Conductores</h1>
-<a th:href="@{/conductor/add}">Agregar</a>
-<table class="conductor-list">
+<form method="get" action="#" th:action="@{/conductor/search}">
+    <label for="searchText">Buscar por nombre</label>
+    <input type="text" id="searchText" name="searchText">
+    <button type="submit">Search</button>
+</form>
+
+<h1>Persons</h1>
+<table class="person-list">
     <thead>
     <tr>
         <th>Nombre</th>
         <th>Cedula</th>
         <th>Telefono</th>
         <th>Direccion</th>
+        <th>Ver</th>
+        <th>Editar</th>
     </tr>
     </thead>
     <tbody>
@@ -30,9 +37,6 @@
         </td>
         <td>
             <a th:href="@{/conductor/edit-form/{id}(id=${p.id})}">Editar</a>
-        </td>
-        <td>
-            <a th:href="@{/conductor/delete/{id}(id=${p.id})}">Eliminar</a>
         </td>
     </tr>
     </tbody>
