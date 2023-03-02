@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+
+<h1>Conductores</h1>
+
+<table class="conductor-list">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Cedula</th>
+        <th>Telefono</th>
+        <th>Direccion</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="p : ${conductores}" th:if="${p.nombre}">
+        <td th:text="${p.nombre}"></td>
+        <td th:text="${p.cedula}"></td>
+        <td th:text="${p.telefono}"></td>
+        <td th:text="${p.direccion}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>

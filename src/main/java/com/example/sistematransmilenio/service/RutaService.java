@@ -10,6 +10,5 @@ public class RutaService {
 
     @Autowired
     RutaRepository rutaRepository;
-
     public Iterable<Ruta> listarRutas (){return rutaRepository.findAll();}
 }

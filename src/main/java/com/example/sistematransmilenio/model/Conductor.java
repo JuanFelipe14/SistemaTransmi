@@ -4,20 +4,33 @@ package com.example.sistematransmilenio.model;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class Conductor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(name = "nombre", nullable = false)
+    @NotBlank(message = "no puede estar en blanco")
     private String nombre;
+
+    @Column(name = "cedula", nullable = false)
+    @NotNull(message = "no puede ser nulo")
     private int cedula;
+    @Column(name = "telefono", nullable = false)
+    @NotNull(message = "no puede ser nulo")
     private int telefono;
+    @Column(name = "direccion", nullable = false)
+    @NotBlank(message = "no puede estar en blanco")
     private String direccion;
+
     private UUID codigo;
 
     @OneToMany

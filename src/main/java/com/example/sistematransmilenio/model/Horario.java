@@ -1,5 +1,7 @@
 package com.example.sistematransmilenio.model;
 
+import com.example.sistematransmilenio.Enumeration.DiasSemana;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +30,7 @@ public class Horario {
         idHorario=UUID.randomUUID();
     }
 
-    public Horario(Bus busHorario, Conductor conductorHorario, Ruta rutaHorario, UUID idHorario, ArrayList<DiasSemana> diasHorario,Date horaFin,Date horaInicio) {
+    public Horario(Bus busHorario, Conductor conductorHorario, Ruta rutaHorario, UUID idHorario, ArrayList<DiasSemana> diasHorario, Date horaFin, Date horaInicio) {
         this.busHorario = busHorario;
         this.conductorHorario = conductorHorario;
         this.rutaHorario = rutaHorario;

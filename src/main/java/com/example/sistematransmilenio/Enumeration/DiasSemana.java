@@ -1,4 +1,4 @@
-package com.example.sistematransmilenio.model;
+package com.example.sistematransmilenio.Enumeration;
 
 public enum DiasSemana {
     LUNES,

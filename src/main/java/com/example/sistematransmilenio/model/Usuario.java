@@ -1,5 +1,7 @@
 package com.example.sistematransmilenio.model;
 
+import com.example.sistematransmilenio.Enumeration.TipoUsuario;
+
 import java.util.UUID;
 
 public class Usuario {

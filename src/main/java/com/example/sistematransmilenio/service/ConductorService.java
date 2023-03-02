@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.sistematransmilenio.repository.ConductorRepository;
 
+import java.util.List;
+
 @Service
 public class ConductorService {
 
     @Autowired
     private ConductorRepository conductorRepository;
 
-    public Iterable<Conductor> listarConductores (){return conductorRepository.findAll();}
+    public List<Conductor> listarConductores (){return conductorRepository.findAll();}
+
 }

@@ -13,6 +13,7 @@ import com.example.sistematransmilenio.repository.ConductorRepository;
 import com.example.sistematransmilenio.repository.HorarioRepository;
 import com.example.sistematransmilenio.repository.RutaRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -37,7 +38,7 @@ public class DataBaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-       /* Random random = new Random(1234);
+        Random random = new Random(1234);
 
         RandomStringGenerator randomGen = new RandomStringGenerator.Builder().withinRange('a','z').usingRandom(random::nextInt).build();
 
@@ -58,6 +59,7 @@ public class DataBaseInit implements ApplicationRunner {
             busRepository.save(new Bus(placa,modelo));
         }
 
+        /*
         //Crear rutas
         for(int i = 0 ; i < NUM_RUTAS ; i++){
             int codigo = random.nextInt();
