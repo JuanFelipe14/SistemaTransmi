@@ -8,8 +8,8 @@
 <body>
 
 <h1>Buses</h1>
-
-<table class="bus">
+<a th:href="@{/bus/add}">Agregar</a>
+<table class="bus-list">
     <thead>
     <tr>
         <th>Placa</th>
@@ -18,11 +18,17 @@
     </thead>
     <tbody>
 
-    <tr th:each="p : ${bus}" th:if="${p.placa}">
-        <td th:text="${p.Placa}"></td>
-        <td th:text="${p.Modelo}"></td>
+    <tr th:each="p : ${bus}" th:if="${p.bus}">
+        <td th:text="${p.placa}"></td>
+        <td th:text="${p.modelo}"></td>
         <td>
-            <a th:href="@{/bus/save/{id}(id=${p.id})}">Crear bus</a>
+            <a th:href="@{/bus/view/{id}(id=${p.id})}">Ver</a>
+        </td>
+        <td>
+            <a th:href="@{/bus/edit-form/{id}(id=${p.id})}">Editar</a>
+        </td>
+        <td>
+            <a th:href="@{/bus/delete/{id}(id=${p.id})}">Eliminar</a>
         </td>
     </tr>
     </tbody>
