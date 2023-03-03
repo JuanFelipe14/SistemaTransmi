@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
+    <link rel="stylesheet" href="/estilo.css">
 </head>
 
 <body>
@@ -18,17 +18,17 @@
     </thead>
     <tbody>
 
-    <tr th:each="p : ${bus}" th:if="${p.bus}">
-        <td th:text="${p.placa}"></td>
-        <td th:text="${p.modelo}"></td>
+    <tr th:each="b : ${bus}" th:if="${b.placa}">
+        <td th:text="${b.placa}"></td>
+        <td th:text="${b.modelo}"></td>
         <td>
-            <a th:href="@{/bus/view/{id}(id=${p.id})}">Ver</a>
+            <a th:href="@{/bus/view/{id}(id=${b.id})}">Ver</a>
         </td>
         <td>
-            <a th:href="@{/bus/edit-form/{id}(id=${p.id})}">Editar</a>
+            <a th:href="@{/bus/edit-form/{id}(id=${b.id})}">Editar</a>
         </td>
         <td>
-            <a th:href="@{/bus/delete/{id}(id=${p.id})}">Eliminar</a>
+            <a th:href="@{/bus/delete/{id}(id=${b.id})}">Eliminar</a>
         </td>
     </tr>
     </tbody>

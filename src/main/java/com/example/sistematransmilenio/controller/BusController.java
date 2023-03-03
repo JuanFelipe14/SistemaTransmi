@@ -4,6 +4,7 @@ import com.example.sistematransmilenio.model.Bus;
 import com.example.sistematransmilenio.model.Conductor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,15 +20,16 @@ import java.util.List;
 public class BusController {
     private ArrayList<Bus> buses;
 
+    @Autowired
     private BusService busService;
 
     Logger log = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/list")
     public String listarBuses(Model model) {
-        Iterable<Bus> persons = busService.listarBuses();
-        model.addAttribute("persons", persons);
-        return "person-list";
+        Iterable<Bus> bus = busService.listarBuses();
+        model.addAttribute("bus", bus);
+        return "bus-list";
     }
 
     @PostMapping(value = "/save")

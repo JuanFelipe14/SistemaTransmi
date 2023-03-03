@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Entity
 public class Horario {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -22,9 +21,69 @@ public class Horario {
     private Ruta rutaHorario;
 
     private UUID idHorario;
+
+    private DiasSemana diasSemana;
     private Date horaInicio;
     private Date horaFin;
+    private String horaInicioStr;
+    private String horaFinStr;
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public DiasSemana getDiasSemana() {
+        return diasSemana;
+    }
+
+    public void setDiasSemana(DiasSemana diasSemana) {
+        this.diasSemana = diasSemana;
+    }
+
+    public UUID getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(UUID idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public Date getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+
+
+
+    public String getHoraInicioStr() {
+        return horaInicioStr;
+    }
+
+    public void setHoraInicioStr(String horaInicioStr) {
+        this.horaInicioStr = horaInicioStr;
+    }
+
+    public String getHoraFinStr() {
+        return horaFinStr;
+    }
+
+    public void setHoraFinStr(String horaFinStr) {
+        this.horaFinStr = horaFinStr;
+    }
 
     public Horario() {
         idHorario=UUID.randomUUID();

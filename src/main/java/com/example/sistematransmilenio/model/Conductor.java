@@ -25,8 +25,7 @@ public class Conductor {
     @NotNull(message = "no puede ser nulo")
     private int cedula;
     @Column(name = "telefono", nullable = false)
-    @NotNull(message = "no puede ser nulo")
-    private int telefono;
+    private @NotNull(message = "no puede ser nulo") long telefono;
     @Column(name = "direccion", nullable = false)
     @NotBlank(message = "no puede estar en blanco")
     private String direccion;
@@ -40,7 +39,7 @@ public class Conductor {
         this.codigo = UUID.randomUUID();
     }
 
-    public Conductor(String nombre, int cedula, int telefono, String direccion) {
+    public Conductor(String nombre, int cedula, long telefono, String direccion) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
@@ -80,7 +79,7 @@ public class Conductor {
         this.cedula = cedula;
     }
 
-    public int getTelefono() {
+    public @NotNull(message = "no puede ser nulo") long getTelefono() {
         return telefono;
     }
 
@@ -100,7 +99,7 @@ public class Conductor {
         this.horarioConductores = horarioConductores;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(@NotNull(message = "no puede ser nulo") long telefono) {
         this.telefono = telefono;
     }
 

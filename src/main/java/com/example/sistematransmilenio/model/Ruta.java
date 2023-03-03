@@ -1,9 +1,6 @@
 package com.example.sistematransmilenio.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +13,25 @@ public class Ruta {
     private Long id;
     private UUID idRuta;
     private int codigo;
-    private ArrayList<String> estaciones;
+
+    @ManyToMany
+    @JoinTable(name = "estaciones_ruta",
+            joinColumns = @JoinColumn(name = "estacion_id"),
+            inverseJoinColumns = @JoinColumn(name = "ruta_id"))
+    private List<Estacion> estaciones= new ArrayList<>();
     private String horarios;
 
     @OneToMany
     List<Horario> horarioRuta = new ArrayList<>();
 
-    public Ruta(int codigo, ArrayList<String> estaciones, String horarios) {
+    public Ruta(int codigo, ArrayList<Estacion> estaciones, String horarios) {
         this.codigo = codigo;
         this.estaciones = estaciones;
         this.horarios = horarios;
         this.idRuta = UUID.randomUUID();
     }
 
-    public Ruta(UUID idRuta, int codigo, ArrayList<String> estaciones, String horarios) {
+    public Ruta(UUID idRuta, int codigo, ArrayList<Estacion> estaciones, String horarios) {
         this.idRuta = idRuta;
         this.codigo = codigo;
         this.estaciones = estaciones;
@@ -49,11 +51,11 @@ public class Ruta {
         this.codigo = codigo;
     }
 
-    public ArrayList<String> getEstaciones() {
+    public List<Estacion> getEstaciones() {
         return estaciones;
     }
 
-    public void setEstaciones(ArrayList<String> estaciones) {
+    public void setEstaciones(List<Estacion> estaciones) {
         this.estaciones = estaciones;
     }
 

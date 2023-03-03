@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <select name="color">
+        <option th:each="dia : ${T(com.example.sistematransmilenio.Enumeration.TipoUsuario).values()}"
+                th:value="${colorOpt}" th:text="${colorOpt}"></option>
+    </select>
+</head>
+<body>
+
+</body>
+</html>

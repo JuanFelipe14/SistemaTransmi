@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
+    <link rel="stylesheet" href="/estilo.css">
 </head>
 
 <body>
@@ -11,13 +11,13 @@
     <form action="#" th:action="@{/bus/save}" th:object="${bus}" method="post">
         <input type="hidden" th:field="*{id}" id="id">
         <label for="busPlaca">Placa: </label>
-        <input type="text" th:field="*{bus}" id="busPlaca">
-        <span th:if="${#fields.hasErrors('bus')}" th:errors="*{bus}"
-              th:class="${#fields.hasErrors('bus')} ? 'error' : ''"></span>
+        <input type="text" th:field="*{placa}" id="busPlaca">
+        <span th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"
+              th:class="${#fields.hasErrors('placa')} ? 'error' : ''"></span>
         <label for="busModelo">Modelo: </label>
-        <input type="text" th:field="*{bus}" id="busModelo">
-        <span th:if="${#fields.hasErrors('bus')}" th:errors="*{bus}"
-              th:class="${#fields.hasErrors('bus')} ? 'error' : ''"></span>
+        <input type="text" th:field="*{modelo}" id="busModelo">
+        <span th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"
+              th:class="${#fields.hasErrors('modelo')} ? 'error' : ''"></span>
         <button type="submit">Enviar</button>
     </form>
 </div>
