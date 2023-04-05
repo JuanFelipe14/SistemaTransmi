@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bienvenida</title>
+    <link rel="stylesheet" href="/estilo.css">
+    <link rel="stylesheet" type="text/css" href="bienvenida.css">
+</head>
+<body>
+<nav>
+    <div id="menuhorizontal">
+        <ul>
+            <li>
+                <a th:href="@{/horario/list}" class="linkPagina">Bienvenida</a>
+            </li>
+            <li>
+                <a th:href="@{/conductor/list}" class="linkPagina">Conductor</a>
+            </li>
+            <li>
+                <a th:href="@{/bus/list}" class="linkPagina">Buses</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<p class="text">Sean bienvenidos a la pagina de transmilenio, donde se podran ver todos los horarios de las rutas</p>
+<a th:href="@{/horario/save}" class="linkPagina">Agregar horario</a>
+<table class="conductor-list">
+<thead>
+<tr>
+    <th>Placa</th>
+    <th>Conductor</th>
+    <th>Hora Inicio</th>
+    <th>Hora Fin</th>
+    <th>Dia</th>
+</tr>
+</thead>
+<tbody>
+
+<tr th:each="p : ${horarios}" th:if="${p.busHorario.placa}">
+    <td th:text="${p.busHorario.placa}"></td>
+    <td th:text="${p.conductorHorario.nombre}"></td>
+    <td th:text="${p.horaInicioStr}"></td>
+    <td th:text="${p.horaFinStr}"></td>
+    <td th:text="${p.diasSemana}"></td>
+    <td>
+        <a th:href="@{/bus/view/{id}(id=${p.id})}">Ver</a>
+    </td>
+    <td>
+        <a th:href="@{/bus/edit-form/{id}(id=${p.id})}">Editar</a>
+    </td>
+    <td>
+        <a th:href="@{/bus/delete/{id}(id=${p.id})}">Eliminar</a>
+    </td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

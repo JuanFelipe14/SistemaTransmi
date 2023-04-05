@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/estilo.css">
+    <title>Title</title>
+
+</head>
+<body>
+<div class="formcontainer">
+    <h1>Nuevo horario</h1>
+<form method="post" action="/horario/procesarHorarioCreado">
+
+    <label for="dropConducs">Conductores </label>
+
+    <select id="dropConducs" name="dropConducs" class="form-control" th:field="${conductores}">
+        <option th:each="conductores : ${conductores}" th:value="${conductores.cedula}" th:text="${conductores.nombre}"  ></option>
+    </select>
+    <label for="dropBuses">Buses </label>
+
+    <select id="dropBuses" name ="dropBuses" class="form-control"  th:field="${buses}">
+        <option th:each="buses : ${buses}" th:value="${buses.placa}" th:text="${buses.placa}" ></option>
+    </select>
+    <label for="dropRutas">Rutas </label>
+
+    <select id="dropRutas" class="form-control"  th:field="${rutas}">
+        <option th:each="rutas : ${rutas}" th:value="${rutas.nombreRuta}" th:text="${rutas.nombreRuta}"></option>
+    </select>
+    <label for="dropDias">Dias </label>
+
+    <select id="dropDias" name="dropDias" class="form-control">
+        <option value="LUNES">LUNES</option>
+        <option value="MARTES">MARTES</option>
+        <option value="MIERCOLES">MIERCOLES</option>
+        <option value="JUEVES">JUEVES</option>
+        <option value="VIERNES">VIERNES</option>
+        <option value="SABADO">SABADO</option>
+        <option value="DOMINGO">DOMINGOs</option>
+    </select>
+    <label for="horaInicio">Hora de inicio</label>
+    <input type="text" id="horaInicio" name="horaInicio">
+    <label for="horaFin">Hora de finalización</label>
+    <input type="text" id="horaFin" name="horaFin">
+    <p></p>
+    <button type="submit">Enviar</button>
+
+</form>
+</div>
+</body>
+</html>

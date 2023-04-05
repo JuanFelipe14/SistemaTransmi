@@ -1,59 +1,163 @@
 @startuml
-class controller.GeneralController {
+interface com.example.sistematransmilenio.repository.ConductorRepository {
 }
-class controller.BusController {
+enum com.example.sistematransmilenio.model.TipoUsuario {
++  ADMINISTRADOR
++  COORDINADOR
++  PASAJERO
+}
+class com.example.sistematransmilenio.model.Horario {
+- Long id
+- Bus busHorario
+- Conductor conductorHorario
+- Ruta rutaHorario
+- UUID idHorario
+- Date horaInicio
+- Date horaFin
++ Bus getBusHorario()
++ void setBusHorario(Bus)
++ Conductor getConductorHorario()
++ void setConductorHorario(Conductor)
++ Ruta getRutaHorario()
++ void setRutaHorario(Ruta)
+}
+class com.example.sistematransmilenio.model.Bus {
+- Long id
+- String placa
+- UUID idBus
+- String modelo
+~ List<Horario> horarioBus
++ Long getId()
++ void setId(Long)
++ UUID getIdBus()
++ void setIdBus(UUID)
++ String getPlaca()
++ void setPlaca(String)
++ String getModelo()
++ void setModelo(String)
+}
+interface com.example.sistematransmilenio.repository.RutaRepository {
+}
+class com.example.sistematransmilenio.model.Usuario {
+- UUID idUsuario
+- TipoUsuario rol
+- String nombres
+- String apellidos
+- Integer cedula
++ UUID getIdUsuario()
++ void setIdUsuario(UUID)
++ TipoUsuario getRol()
++ void setRol(TipoUsuario)
++ String getNombres()
++ void setNombres(String)
++ String getApellidos()
++ void setApellidos(String)
++ Integer getCedula()
++ void setCedula(Integer)
+}
+interface com.example.sistematransmilenio.repository.BusRepository {
+}
+class com.example.sistematransmilenio.controller.ConductorController {
+- ArrayList<Conductor> conductores
+}
+class com.example.sistematransmilenio.service.ConductorService {
+- ConductorRepository conductorRepository
++ Iterable<Conductor> listarConductores()
+}
+class com.example.sistematransmilenio.Database.DataBaseInit {
+- {static} int NUM_CONDUCTORES
+- {static} int NUM_BUSES
+- {static} int NUM_RUTAS
+~ ConductorRepository conductorRepository
+~ BusRepository busRepository
+~ RutaRepository rutaRepository
+~ HorarioRepository horarioRepository
++ void run(ApplicationArguments)
+}
+class com.example.sistematransmilenio.controller.HorarioController {
+}
+class com.example.sistematransmilenio.service.RutaService {
+~ RutaRepository rutaRepository
++ Iterable<Ruta> listarRutas()
+}
+class com.example.sistematransmilenio.SistemaTransmilenioApplication {
++ {static} void main(String[])
+}
+class com.example.sistematransmilenio.service.BusService {
+- BusRepository busRepository
++ Iterable<Bus> listarBuses()
+}
+enum com.example.sistematransmilenio.model.DiasSemana {
++  LUNES
++  MARTES
++  MIERCOLES
++  JUEVES
++  VIERNES
++  SABADO
++  DOMINGO
+}
+class com.example.sistematransmilenio.model.Conductor {
+- Long id
+- String nombre
+- int cedula
+- int telefono
+- String direccion
+- UUID codigo
+~ List<Horario> horarioConductores
++ Long getId()
++ void setId(Long)
++ String getNombre()
++ void setNombre(String)
++ int getCedula()
++ void setCedula(int)
++ int getTelefono()
++ UUID getCodigo()
++ void setCodigo(UUID)
++ List<Horario> getHorarioConductores()
++ void setHorarioConductores(List<Horario>)
++ void setTelefono(int)
++ String getDireccion()
++ void setDireccion(String)
+}
+interface com.example.sistematransmilenio.repository.HorarioRepository {
+}
+class com.example.sistematransmilenio.controller.BusController {
 - ArrayList<Bus> buses
+- BusService busService
++ String listarPersonas(Model)
 }
-class model.Ruta {
+class com.example.sistematransmilenio.model.Ruta {
+- Long id
+- UUID idRuta
 - int codigo
 - ArrayList<String> estaciones
 - String horarios
+~ List<Horario> horarioRuta
 + int getCodigo()
 + void setCodigo(int)
 + ArrayList<String> getEstaciones()
 + void setEstaciones(ArrayList<String>)
 + String getHorarios()
 + void setHorarios(String)
++ Long getId()
++ void setId(Long)
++ UUID getIdRuta()
++ void setIdRuta(UUID)
++ List<Horario> getHorarioRuta()
++ void setHorarioRuta(List<Horario>)
 }
-class model.Conductor {
-~ String nombre
-~ int cedula
-~ int telefono
-~ String direccion
-~ ArrayList<Bus> busesAsignados
-+ String getNombre()
-+ void setNombre(String)
-+ int getCedula()
-+ void setCedula(int)
-+ int getTelefono()
-+ void setTelefono(int)
-+ String getDireccion()
-+ void setDireccion(String)
-+ ArrayList<Bus> getBusesAsignados()
-+ void setBusesAsignados(ArrayList<Bus>)
+class com.example.sistematransmilenio.service.HorarioService {
+- HorarioRepository horarioRepository
++ Iterable<Horario> getHorarios()
 }
-class controller.RutaController {
+class com.example.sistematransmilenio.controller.RutaController {
 - ArrayList<Ruta> rutas
 }
-class model.Bus {
-- String placa
-- String modelo
-- ArrayList<Ruta> rutasAsignadas
-+ String getPlaca()
-+ void setPlaca(String)
-+ String getModelo()
-+ void setModelo(String)
-+ ArrayList<Ruta> getRutasAsignadas()
-+ void setRutasAsignadas(ArrayList<Ruta>)
-}
-enum model.TipoUsuario {
-}
-class controller.ConductorController {
-- ArrayList<Conductor> conductores
-}
-class model.Usuario {
-- UUID idUsuario
-}
-interface InterfaceSystem.IGlobalController {
-}
+
+
+org.springframework.data.repository.CrudRepository <|-- com.example.sistematransmilenio.repository.ConductorRepository
+org.springframework.data.repository.CrudRepository <|-- com.example.sistematransmilenio.repository.RutaRepository
+org.springframework.data.repository.CrudRepository <|-- com.example.sistematransmilenio.repository.BusRepository
+org.springframework.boot.ApplicationRunner <|.. com.example.sistematransmilenio.Database.DataBaseInit
+org.springframework.data.repository.CrudRepository <|-- com.example.sistematransmilenio.repository.HorarioRepository
 @enduml

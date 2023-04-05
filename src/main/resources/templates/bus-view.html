@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+
+<body>
+    <h1>Bus</h1>
+    <p th:text="|Placa ${bus.placa}|"></p>
+    <p th:text="|Modelo:${bus.modelo}|"></p>
+    <a th:href="@{/bus/list}">Volver</a>
+</body>
+
+</html>

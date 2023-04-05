@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+
+<form method="get" action="#" th:action="@{/bus/search}">
+    <label for="searchText">Buscar por placa</label>
+    <input type="text" id="searchText" name="searchText">
+    <button type="submit">Search</button>
+</form>
+
+<h1>Buses</h1>
+<table class="bus-list">
+    <thead>
+    <tr>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Ver</th>
+        <th>Editar</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="p : ${bus}" th:if="${p.placa}">
+        <td th:text="${p.placa}"></td>
+        <td th:text="${p.modelo}"></td>
+
+        <td>
+            <a th:href="@{/bus/view/{id}(id=${p.id})}">Ver</a>
+        </td>
+        <td>
+            <a th:href="@{/bus/edit-form/{id}(id=${p.id})}">Editar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>
