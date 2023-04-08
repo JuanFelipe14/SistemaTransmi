@@ -18,6 +18,7 @@ import java.util.Random;
 @Component
 public class DataBaseInit implements ApplicationRunner {
 
+
     private static final int NUM_CONDUCTORES = 50;
     private static final int NUM_BUSES = 50;
     private static final int NUM_RUTAS = 50;
@@ -40,6 +41,7 @@ public class DataBaseInit implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
+        /*
         Random random = new Random(1234);
 
         RandomStringGenerator randomGen = new RandomStringGenerator.Builder().withinRange('a', 'z').usingRandom(random::nextInt).build();
@@ -77,7 +79,7 @@ public class DataBaseInit implements ApplicationRunner {
             String horarios = randomGen.generate(5,10);
             rutaRepository.save(new Ruta(codigo,estaciones,horarios));
         }
-*/
+*//*
         Estacion estacion = new Estacion("Tunal");
         Estacion estacion2 = new Estacion("Prado");
         Estacion estacion3 = new Estacion("85");
@@ -138,6 +140,6 @@ public class DataBaseInit implements ApplicationRunner {
         ruta.setHorarioRuta(horarios);
 
         horarioRepository.save(horario);
-
+*/
     }
 }

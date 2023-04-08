@@ -10,8 +10,8 @@ import java.util.UUID;
 public class Ruta {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private UUID idRuta;
 
     private String nombreRuta;
     private int codigo;
@@ -30,19 +30,12 @@ public class Ruta {
         this.codigo = codigo;
         this.estaciones = estaciones;
         this.horarios = horarios;
-        this.idRuta = UUID.randomUUID();
-    }
 
-    public Ruta(UUID idRuta, int codigo, ArrayList<Estacion> estaciones, String horarios) {
-        this.idRuta = idRuta;
-        this.codigo = codigo;
-        this.estaciones = estaciones;
-        this.horarios = horarios;
     }
 
     public Ruta() {
         estaciones= new ArrayList<>();
-        idRuta=UUID.randomUUID();
+
     }
 
     public String getNombreRuta() {
@@ -83,14 +76,6 @@ public class Ruta {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getIdRuta() {
-        return idRuta;
-    }
-
-    public void setIdRuta(UUID idRuta) {
-        this.idRuta = idRuta;
     }
 
     public List<Horario> getHorarioRuta() {

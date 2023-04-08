@@ -1,0 +1,10 @@
+2023-04-08 14:45:16 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from RUTA\000d\000a[*]select* from Horarios"; SQL statement:
+select * from RUTA
+select* from Horarios [42000-214]
+2023-04-08 14:45:25 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HORARIOS" not found; SQL statement:
+select* from Horarios [42102-214]
+2023-04-08 14:45:25 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HORARIOS" not found; SQL statement:
+select* from Horarios [42102-214]
