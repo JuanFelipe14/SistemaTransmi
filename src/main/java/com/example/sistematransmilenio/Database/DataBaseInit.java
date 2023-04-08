@@ -18,7 +18,6 @@ import java.util.Random;
 @Component
 public class DataBaseInit implements ApplicationRunner {
 
-
     private static final int NUM_CONDUCTORES = 50;
     private static final int NUM_BUSES = 50;
     private static final int NUM_RUTAS = 50;
@@ -71,22 +70,15 @@ public class DataBaseInit implements ApplicationRunner {
             busRepository.save(new Bus(placa, modelo));
         }
 
-        /*
-        //Crear rutas
-        for(int i = 0 ; i < NUM_RUTAS ; i++){
-            int codigo = random.nextInt();
-            ArrayList<String> estaciones = new ArrayList<>();
-            String horarios = randomGen.generate(5,10);
-            rutaRepository.save(new Ruta(codigo,estaciones,horarios));
-        }
-*//*
+
+        rutaRepository.save(new Ruta("H23",null));
+
         Estacion estacion = new Estacion("Tunal");
         Estacion estacion2 = new Estacion("Prado");
         Estacion estacion3 = new Estacion("85");
         Estacion estacion4 = new Estacion("45");
 
         Ruta ruta = new Ruta();
-        ruta.setCodigo(1);
         ruta.setNombreRuta("Ruta 1");
         ArrayList<Ruta> rutas = new ArrayList<>();
 
@@ -135,6 +127,7 @@ public class DataBaseInit implements ApplicationRunner {
         horario.setHoraInicioStr(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
         horario.setDiasSemana(DiasSemana.JUEVES);
         ArrayList<Horario> horarios = new ArrayList<>();
+        horario.setRutaHorario(null);
         horarios.add(horario);
 
         ruta.setHorarioRuta(horarios);

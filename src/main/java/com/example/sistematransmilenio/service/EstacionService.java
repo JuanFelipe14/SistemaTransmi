@@ -30,4 +30,8 @@ public class EstacionService {
         }
         return nuevasEstaciones;
     }
+
+    public void eliminarEstacion(long id) {
+        estacionRepository.deleteById(id);
+    }
 }

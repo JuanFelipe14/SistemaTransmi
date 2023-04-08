@@ -14,22 +14,19 @@ public class Ruta {
     private Long id;
 
     private String nombreRuta;
-    private int codigo;
-
     @ManyToMany
     @JoinTable(name = "estaciones_ruta",
             joinColumns = @JoinColumn(name = "estacion_id"),
             inverseJoinColumns = @JoinColumn(name = "ruta_id"))
     private List<Estacion> estaciones= new ArrayList<>();
-    private String horarios;
+
 
     @OneToMany
     List<Horario> horarioRuta = new ArrayList<>();
 
-    public Ruta(int codigo, ArrayList<Estacion> estaciones, String horarios) {
-        this.codigo = codigo;
+    public Ruta(String nombreRuta, ArrayList<Estacion> estaciones) {
+        this.nombreRuta = nombreRuta;
         this.estaciones = estaciones;
-        this.horarios = horarios;
 
     }
 
@@ -46,13 +43,7 @@ public class Ruta {
         this.nombreRuta = nombreRuta;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
 
     public List<Estacion> getEstaciones() {
         return estaciones;
@@ -62,13 +53,7 @@ public class Ruta {
         this.estaciones = estaciones;
     }
 
-    public String getHorarios() {
-        return horarios;
-    }
 
-    public void setHorarios(String horarios) {
-        this.horarios = horarios;
-    }
 
     public Long getId() {
         return id;

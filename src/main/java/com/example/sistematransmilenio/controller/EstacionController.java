@@ -5,10 +5,7 @@ import com.example.sistematransmilenio.model.dto.EstacionDto;
 import com.example.sistematransmilenio.service.EstacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,13 @@ public class EstacionController {
     @GetMapping("/list")
     public List<EstacionDto> listarEstaciones(){
         return estacionService.listEstacionesDto();
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/delete/{id}")
+    public boolean eliminarEstacion(@PathVariable Long id) {
+        estacionService.eliminarEstacion(id);
+        return true;
     }
 
 
