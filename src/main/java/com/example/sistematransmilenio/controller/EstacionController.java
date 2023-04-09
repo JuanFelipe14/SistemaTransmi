@@ -42,11 +42,23 @@ public class EstacionController {
 
     @CrossOrigin("http://localhost:4200/")
     @PutMapping("/edit")
-    public EstacionDto modificarEstacion(@Valid @RequestBody Estacion estacion) {
-        Estacion estacionSave=estacionService.update(estacion);
+    public EstacionDto modificarEstacion(@Valid @RequestBody EstacionDto estacion) {
+        Estacion estacionAnterior = estacionService.findEstacionById(estacion.getId());
+        estacionAnterior.setNombre(estacion.getNombre());
+        Estacion estacionSave=estacionService.update(estacionAnterior);
         EstacionDto estacionRetorno = new EstacionDto(estacionSave.getId(), estacionSave.getNombre());
         return  estacionRetorno;
     }
+
+    @PostMapping(value = "/add")
+    public EstacionDto agregarEstacion(@Valid @RequestBody EstacionDto estacion) {
+        Estacion estacionNueva = new Estacion();
+        estacionNueva.setNombre(estacion.getNombre());
+        estacionNueva = estacionService.save(estacionNueva);
+        EstacionDto estacionRetorno = new EstacionDto(estacionNueva.getId(),estacionNueva.getNombre());
+        return estacionRetorno;
+    }
+
 
 
 
