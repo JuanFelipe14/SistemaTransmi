@@ -42,4 +42,8 @@ public class EstacionService {
     public Estacion update(Estacion estacion) {
         return estacionRepository.save(estacion);
     }
+
+    public Estacion save(Estacion estacionNueva) {
+        return estacionRepository.save(estacionNueva);
+    }
 }
