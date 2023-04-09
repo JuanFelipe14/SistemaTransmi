@@ -50,12 +50,16 @@ public class BusController {
         return bus;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/edit-form/{id}")
     public String formularioEditarBus(Model model, @PathVariable Long id) {
         Bus b = busService.recuperarBus(id);
         model.addAttribute("bus", b);
         return "bus-edit";
     }
+
+
+
 
     @GetMapping("/search")
     public String listBuses(@RequestParam(required = false) String searchText, Model model) {

@@ -34,4 +34,12 @@ public class EstacionService {
     public void eliminarEstacion(long id) {
         estacionRepository.deleteById(id);
     }
+
+    public Estacion findEstacionById(Long id) {
+        return estacionRepository.findById(id).get();
+    }
+
+    public Estacion update(Estacion estacion) {
+        return estacionRepository.save(estacion);
+    }
 }

@@ -1,12 +1,15 @@
 package com.example.sistematransmilenio.controller;
 
+import com.example.sistematransmilenio.model.Bus;
 import com.example.sistematransmilenio.model.Estacion;
 import com.example.sistematransmilenio.model.dto.EstacionDto;
 import com.example.sistematransmilenio.service.EstacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,12 +26,27 @@ public class EstacionController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public boolean eliminarEstacion(@PathVariable Long id) {
         estacionService.eliminarEstacion(id);
         return true;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/view/{idEstacion}")
+    public EstacionDto findEstacionById(Model model, @PathVariable("idEstacion") Long id) {
+        Estacion estacion = estacionService.findEstacionById(id);
+        EstacionDto estacionEnvio =  new EstacionDto(estacion.getId(),estacion.getNombre());
+        return estacionEnvio;
+    }
+
+    @CrossOrigin("http://localhost:4200/")
+    @PutMapping("/edit")
+    public EstacionDto modificarEstacion(@Valid @RequestBody Estacion estacion) {
+        Estacion estacionSave=estacionService.update(estacion);
+        EstacionDto estacionRetorno = new EstacionDto(estacionSave.getId(), estacionSave.getNombre());
+        return  estacionRetorno;
+    }
 
 
 
