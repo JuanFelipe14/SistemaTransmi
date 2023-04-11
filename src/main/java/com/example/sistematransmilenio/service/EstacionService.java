@@ -31,8 +31,14 @@ public class EstacionService {
         return nuevasEstaciones;
     }
 
-    public void eliminarEstacion(long id) {
-        estacionRepository.deleteById(id);
+    public boolean eliminarEstacion(long id) {
+        try{
+            estacionRepository.deleteById(id);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+
     }
 
     public Estacion findEstacionById(Long id) {
