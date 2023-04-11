@@ -28,8 +28,7 @@ public class EstacionController {
     @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/delete/{id}")
     public boolean eliminarEstacion(@PathVariable Long id) {
-        estacionService.eliminarEstacion(id);
-        return true;
+        return estacionService.eliminarEstacion(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -50,6 +49,7 @@ public class EstacionController {
         return  estacionRetorno;
     }
 
+    @CrossOrigin("http://localhost:4200/")
     @PostMapping(value = "/add")
     public EstacionDto agregarEstacion(@Valid @RequestBody EstacionDto estacion) {
         Estacion estacionNueva = new Estacion();
