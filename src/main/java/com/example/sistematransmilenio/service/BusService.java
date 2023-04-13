@@ -24,6 +24,10 @@ public class BusService {
         busRepository.save(bus);
     }
 
+    public Bus save(Bus nuevoBus){
+        return busRepository.save(nuevoBus);
+    }
+
     public List<Bus> buscarPorNombre(String textoBusqueda) {
         return busRepository.findBusByPlacaStartingWith(textoBusqueda);
     }
