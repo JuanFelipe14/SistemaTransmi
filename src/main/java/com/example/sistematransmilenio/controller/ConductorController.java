@@ -30,6 +30,7 @@ public class ConductorController {
         return conductor;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/save")
     public String guardarConductor(@Valid Conductor conductor, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -39,6 +40,7 @@ public class ConductorController {
         return "redirect:/conductor/list";
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/view/{idConductor}")
     String verConductor(Model model, @PathVariable("idConductor") Long id) {
         Conductor conductor = conductorService.recuperarConductor(id);
@@ -46,6 +48,7 @@ public class ConductorController {
         return "conductor-view";
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/edit-form/{id}")
     public String formularioEditarConductor(Model model, @PathVariable Long id) {
         Conductor c = conductorService.recuperarConductor(id);
