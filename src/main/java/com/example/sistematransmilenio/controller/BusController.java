@@ -59,8 +59,16 @@ public class BusController {
         return "bus-edit";
     }
 
-
-
+    @CrossOrigin("http://localhost:4200/")
+    @PutMapping("/edit")
+    public BusDto modificarBus(@Valid @RequestBody BusDto bus){
+        Bus busAnterior = busService.findBusByPlaca(bus.getPlaca());
+        busAnterior.setModelo(bus.getModelo());
+        busAnterior.setPlaca(bus.getPlaca());
+        Bus busSave = busService.update(busAnterior);
+        BusDto busRetorno = new BusDto(busSave.getId(),busSave.getPlaca(),busSave.getModelo());
+        return busRetorno;
+    }
 
     @GetMapping("/search")
     public String listBuses(@RequestParam(required = false) String searchText, Model model) {

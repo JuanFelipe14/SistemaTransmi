@@ -20,6 +20,8 @@ public class BusService {
 
     public Bus findBusByPlaca(String placa){return busRepository.findBusByPlaca(placa);}
 
+    public Bus findBusById(Long id){return busRepository.findById(id).get();}
+
     public void guardarBus(Bus bus) {
         busRepository.save(bus);
     }
@@ -30,6 +32,10 @@ public class BusService {
 
     public Bus save(Bus nuevoBus){
         return busRepository.save(nuevoBus);
+    }
+
+    public Bus update(Bus bus){
+        return busRepository.save(bus);
     }
 
     public void eliminarBus(long id ){
