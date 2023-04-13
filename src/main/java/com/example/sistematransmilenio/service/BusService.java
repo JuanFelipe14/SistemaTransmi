@@ -28,6 +28,10 @@ public class BusService {
         return busRepository.findBusByPlacaStartingWith(textoBusqueda);
     }
 
+    public Bus save(Bus nuevoBus){
+        return busRepository.save(nuevoBus);
+    }
+
     public void eliminarBus(long id ){
         busRepository.deleteById(id);
     }

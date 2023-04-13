@@ -50,6 +50,7 @@ public class EstacionController {
         return  estacionRetorno;
     }
 
+    @CrossOrigin("http://localhost:4200/")
     @PostMapping(value = "/add")
     public EstacionDto agregarEstacion(@Valid @RequestBody EstacionDto estacion) {
         Estacion estacionNueva = new Estacion();
