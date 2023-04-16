@@ -54,16 +54,13 @@ public class BusController {
     @CrossOrigin("http://localhost:4200/")
     @PutMapping("/edit")
     public BusDto modificarBus(@Valid @RequestBody BusDto bus){
-        Bus busAnterior = busService.findBusByPlaca(bus.getPlaca());
+        Bus busAnterior = busService.findBusById(bus.getId());
         busAnterior.setModelo(bus.getModelo());
         busAnterior.setPlaca(bus.getPlaca());
         Bus busSave = busService.update(busAnterior);
         BusDto busRetorno = new BusDto(busSave.getId(),busSave.getPlaca(),busSave.getModelo());
         return busRetorno;
     }
-
-
-
 
     @GetMapping("/search")
     public String listBuses(@RequestParam(required = false) String searchText, Model model) {
@@ -91,10 +88,10 @@ public class BusController {
         return busRetorno;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/delete/{id}")
-    public String eliminarConductor(@PathVariable Long id) {
-        busService.eliminarBus(id);
-        return "redirect:/bus/list";
+    public boolean eliminarConductor(@PathVariable Long id) {
+        return busService.eliminarBus(id);
     }
 
 
