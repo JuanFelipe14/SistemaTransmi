@@ -20,14 +20,9 @@ public class BusService {
 
     public Bus findBusById(Long id){return busRepository.findById(id).get();}
 
-
-
-
     public Bus update(Bus bus){
         return busRepository.save(bus);
     }
-
-    public Bus findBusByPlaca(String placa){return busRepository.findBusByPlaca(placa);}
 
     public void guardarBus(Bus bus) {
         busRepository.save(bus);
@@ -41,8 +36,14 @@ public class BusService {
         return busRepository.findBusByPlacaStartingWith(textoBusqueda);
     }
 
-    public void eliminarBus(long id ){
-        busRepository.deleteById(id);
+    public boolean eliminarBus(long id ){
+        try{
+            busRepository.deleteById(id);
+        }catch(Exception e){
+            return false;
+        }
+
+        return true;
     }
 }
 
