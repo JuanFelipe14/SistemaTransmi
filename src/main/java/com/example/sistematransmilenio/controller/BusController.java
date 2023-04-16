@@ -51,12 +51,15 @@ public class BusController {
         return bus;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/edit-form/{id}")
-    public String formularioEditarBus(Model model, @PathVariable Long id) {
-        Bus b = busService.recuperarBus(id);
-        model.addAttribute("bus", b);
-        return "bus-edit";
+    @CrossOrigin("http://localhost:4200/")
+    @PutMapping("/edit")
+    public BusDto modificarBus(@Valid @RequestBody BusDto bus){
+        Bus busAnterior = busService.findBusByPlaca(bus.getPlaca());
+        busAnterior.setModelo(bus.getModelo());
+        busAnterior.setPlaca(bus.getPlaca());
+        Bus busSave = busService.update(busAnterior);
+        BusDto busRetorno = new BusDto(busSave.getId(),busSave.getPlaca(),busSave.getModelo());
+        return busRetorno;
     }
 
 
