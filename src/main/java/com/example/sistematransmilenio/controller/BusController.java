@@ -94,7 +94,5 @@ public class BusController {
         return busService.eliminarBus(id);
     }
 
-
-
-
+    
 }
