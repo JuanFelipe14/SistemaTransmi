@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 public class Bus {
-
+    //Bus - Para hacer commit
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
