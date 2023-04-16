@@ -16,6 +16,8 @@ public class RutaService {
 
     @Autowired
     RutaRepository rutaRepository;
+    @Autowired
+    EstacionService estacionService;
     public List<Ruta> listarRutas (){return rutaRepository.findAll();}
 
     public Ruta findRutaByNombreRuta(String nombreRuta){return rutaRepository.findRutaByNombreRuta(nombreRuta);}
@@ -23,9 +25,9 @@ public class RutaService {
     public void guardarRuta(Ruta ruta){rutaRepository.save(ruta);}
 
     public RutaDto rutaToRutaDto(Ruta ruta){
-        List<EstacionDto> estaciones = new ArrayList<>();
+        List<String> estaciones = new ArrayList<>();
         for(Estacion estacion: ruta.getEstaciones()){
-            EstacionDto nuevaEstacion = new EstacionDto(estacion.getId(),estacion.getNombre());
+            String nuevaEstacion = new EstacionDto(estacion.getId(),estacion.getNombre()).getNombre();
             estaciones.add(nuevaEstacion);
         }
         return new RutaDto(ruta.getId(),ruta.getNombreRuta(),estaciones);
@@ -43,5 +45,25 @@ public class RutaService {
     public RutaDto findRutaDtoById(Long id) {
         Ruta ruta = rutaRepository.findById(id).get();
         return this.rutaToRutaDto(ruta);
+    }
+
+    public boolean  deleteRuta(Long id) {
+        this.rutaRepository.deleteById(id);
+        return true;
+    }
+
+    public Ruta rutaDtoToRuta(RutaDto rutaDto) {
+        Ruta rutaRetorno = new Ruta();
+        rutaRetorno.setNombreRuta(rutaDto.getNombreRuta());
+        for(String s: rutaDto.getEstaciones()){
+            Estacion estacion = estacionService.findEstacionByNombre(s);
+            rutaRetorno.getEstaciones().add(estacion);
+        }
+        rutaRetorno.setId(-1l);
+        return rutaRetorno;
+    }
+
+    public Ruta save(Ruta rutaNueva) {
+        return this.rutaRepository.save(rutaNueva);
     }
 }

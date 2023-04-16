@@ -5,9 +5,9 @@ import java.util.List;
 public class RutaDto {
     private Long id;
     private String nombreRuta;
-    private List<EstacionDto> estaciones;
+    private List<String> estaciones;
 
-    public RutaDto(Long id, String nombreRuta, List<EstacionDto> estaciones) {
+    public RutaDto(Long id, String nombreRuta, List<String> estaciones) {
         this.id = id;
         this.nombreRuta = nombreRuta;
         this.estaciones = estaciones;
@@ -29,11 +29,11 @@ public class RutaDto {
         this.nombreRuta = nombreRuta;
     }
 
-    public List<EstacionDto> getEstaciones() {
+    public List<String> getEstaciones() {
         return estaciones;
     }
 
-    public void setEstaciones(List<EstacionDto> estaciones) {
+    public void setEstaciones(List<String> estaciones) {
         this.estaciones = estaciones;
     }
 }
