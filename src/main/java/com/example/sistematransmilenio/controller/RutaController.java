@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,22 @@ public class RutaController {
     @GetMapping("/view/{idRuta}")
     public RutaDto verBus(@PathVariable("idRuta") Long id) {
         return rutaService.findRutaDtoById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping(value = "/delete/{id}")
+    public boolean eliminarRutar(@PathVariable Long id) {
+        return rutaService.deleteRuta(id);
+    }
+
+    @CrossOrigin("http://localhost:4200/")
+    @PostMapping(value = "/add")
+    public RutaDto agregarEstacion(@Valid @RequestBody RutaDto rutaDto) {
+        Ruta rutaNueva = new Ruta();
+        rutaNueva = rutaService.rutaDtoToRuta(rutaDto);
+        rutaNueva = rutaService.save(rutaNueva);
+        RutaDto rutaRetorno = rutaService.rutaToRutaDto(rutaNueva);
+        return rutaRetorno;
     }
 
 
