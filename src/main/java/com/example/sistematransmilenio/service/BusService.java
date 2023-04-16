@@ -18,6 +18,15 @@ public class BusService {
     public Bus recuperarBus(Long id) { return  busRepository.findById(id).get();
     }
 
+    public Bus findBusById(Long id){return busRepository.findById(id).get();}
+
+
+
+
+    public Bus update(Bus bus){
+        return busRepository.save(bus);
+    }
+
     public Bus findBusByPlaca(String placa){return busRepository.findBusByPlaca(placa);}
 
     public void guardarBus(Bus bus) {
