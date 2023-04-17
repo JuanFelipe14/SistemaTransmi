@@ -34,11 +34,6 @@ public class RutaController {
         return rutaService.findRutaDtoById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @DeleteMapping(value = "/delete/{id}")
-    public boolean eliminarRutar(@PathVariable Long id) {
-        return rutaService.deleteRuta(id);
-    }
 
     @CrossOrigin("http://localhost:4200/")
     @PostMapping(value = "/add")
@@ -62,6 +57,12 @@ public class RutaController {
         Ruta rutaSave=rutaService.update(rutaAux);
         RutaDto rutaRetorno = rutaService.rutaToRutaDto(rutaSave);
         return  rutaRetorno;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping(value = "/delete/{id}")
+    public boolean eliminarRuta(@PathVariable Long id) {
+        return rutaService.eliminarRuta(id);
     }
 
 

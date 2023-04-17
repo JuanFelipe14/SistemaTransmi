@@ -629,3 +629,6 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/juanf/O
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 57 more
+2023-04-17 12:29:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]RUTA"; expected "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE"; SQL statement:
+RUTA [42001-214]

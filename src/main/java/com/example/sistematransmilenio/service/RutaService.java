@@ -1,9 +1,11 @@
 package com.example.sistematransmilenio.service;
 
 import com.example.sistematransmilenio.model.Estacion;
+import com.example.sistematransmilenio.model.Horario;
 import com.example.sistematransmilenio.model.Ruta;
 import com.example.sistematransmilenio.model.dto.EstacionDto;
 import com.example.sistematransmilenio.model.dto.RutaDto;
+import com.example.sistematransmilenio.repository.HorarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.sistematransmilenio.repository.RutaRepository;
@@ -16,6 +18,9 @@ public class RutaService {
 
     @Autowired
     RutaRepository rutaRepository;
+
+    @Autowired
+    HorarioRepository horarioRepository;
     @Autowired
     EstacionService estacionService;
     public List<Ruta> listarRutas (){return rutaRepository.findAll();}
@@ -73,5 +78,27 @@ public class RutaService {
 
     public Ruta update(Ruta rutaAnterior) {
         return rutaRepository.save(rutaAnterior);
+    }
+
+    public boolean eliminarRuta(Long id) {
+        if(this.validarRuta(id)){
+            //rutaRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private boolean validarRuta(Long id) {
+        List<Horario> horarios = horarioRepository.getHorarioByRutaWithBus(id);
+        if(horarios.isEmpty()){
+            return true;
+        }else{
+            for(Horario h: horarios){
+                System.out.println(h.toString());
+            }
+
+            return false;
+        }
     }
 }
