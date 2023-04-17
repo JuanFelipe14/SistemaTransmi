@@ -45,5 +45,9 @@ public class BusService {
 
         return true;
     }
+
+    public Bus findBusByPlaca(String placa) {
+        return this.busRepository.findBusByPlaca(placa);
+    }
 }
 

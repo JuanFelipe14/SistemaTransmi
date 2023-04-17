@@ -9,6 +9,9 @@ public class HorarioDto {
     private String busHorario;
 
     private String conductorHorario;
+    private Long idConductorHorario;
+    private String rutaHorario;
+    private Long idRutaHorario;
 
     private DiasSemana diasSemana;
 
@@ -16,13 +19,40 @@ public class HorarioDto {
 
     private String horaFinStr;
 
-    public HorarioDto(Long id, String busHorario, String conductorHorario, DiasSemana diasSemana, String horaInicioStr, String horaFinStr) {
+    public HorarioDto(Long id, String busHorario, String conductorHorario, Long idConductorHorario, DiasSemana diasSemana, String horaInicioStr, String horaFinStr,String rutaHorario, Long idRutaHorario) {
+        this.rutaHorario= rutaHorario;
+        this.idRutaHorario=idRutaHorario;
         this.id = id;
         this.busHorario = busHorario;
         this.conductorHorario = conductorHorario;
         this.diasSemana = diasSemana;
         this.horaInicioStr = horaInicioStr;
         this.horaFinStr = horaFinStr;
+        this.idConductorHorario = idConductorHorario;
+    }
+
+    public Long getIdConductorHorario() {
+        return idConductorHorario;
+    }
+
+    public void setIdConductorHorario(Long idConductorHorario) {
+        this.idConductorHorario = idConductorHorario;
+    }
+
+    public String getRutaHorario() {
+        return rutaHorario;
+    }
+
+    public void setRutaHorario(String rutaHorario) {
+        this.rutaHorario = rutaHorario;
+    }
+
+    public Long getIdRutaHorario() {
+        return idRutaHorario;
+    }
+
+    public void setIdRutaHorario(Long idRutaHorario) {
+        this.idRutaHorario = idRutaHorario;
     }
 
     public Long getId() {

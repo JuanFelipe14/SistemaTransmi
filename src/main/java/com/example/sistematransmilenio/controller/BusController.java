@@ -90,7 +90,7 @@ public class BusController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/delete/{id}")
-    public boolean eliminarConductor(@PathVariable Long id) {
+    public boolean eliminarBus(@PathVariable Long id) {
         return busService.eliminarBus(id);
     }
 

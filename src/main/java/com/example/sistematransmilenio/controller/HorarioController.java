@@ -5,6 +5,7 @@ import com.example.sistematransmilenio.model.Bus;
 import com.example.sistematransmilenio.model.Conductor;
 import com.example.sistematransmilenio.model.Horario;
 import com.example.sistematransmilenio.model.Ruta;
+import com.example.sistematransmilenio.model.dto.BusDto;
 import com.example.sistematransmilenio.model.dto.HorarioDto;
 import com.example.sistematransmilenio.service.BusService;
 import com.example.sistematransmilenio.service.ConductorService;
@@ -45,6 +46,26 @@ public class HorarioController{
         return horarios;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/view/{id}")
+    public HorarioDto verHorario( @PathVariable("id") Long id) {
+        HorarioDto horarioRetorno = horarioService.findHorarioDtoById(id);
+        return horarioRetorno;
+    }
+
+    @CrossOrigin("http://localhost:4200")
+    @PostMapping(value = "/add")
+    public HorarioDto agregarHorario(@Valid @RequestBody HorarioDto horario) {
+        Horario horarioSave = horarioService.horarioDtoToHorario(horario);
+        System.out.println(horario.toString());
+        System.out.println(horarioSave.toString());
+        horarioSave.setId(-1L);
+        horarioSave = horarioService.save(horarioSave);
+        HorarioDto horarioRetorno = horarioService.horarioToHorarioDto(horarioSave);
+        return horarioRetorno;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping( "/save")
     public String guardarHorario(@Valid Horario horario, BindingResult result, Model model) {
         model.addAttribute("conductores",conductorService.listarConductores());

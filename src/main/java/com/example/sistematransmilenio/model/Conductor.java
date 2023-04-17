@@ -30,13 +30,13 @@ public class Conductor {
     @NotBlank(message = "no puede estar en blanco")
     private String direccion;
 
-    private UUID codigo;
+
 
     @OneToMany
     List<Horario> horarioConductores = new ArrayList<>();
 
     public Conductor() {
-        this.codigo = UUID.randomUUID();
+
     }
 
     public Conductor(String nombre, int cedula, long telefono, String direccion) {
@@ -44,15 +44,14 @@ public class Conductor {
         this.cedula = cedula;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.codigo = UUID.randomUUID();
     }
 
-    public Conductor(String nombre, int cedula, int telefono, String direccion, UUID codigo) {
+    public Conductor(String nombre, int cedula, int telefono, String direccion) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.codigo = codigo;
+
     }
 
     public Long getId() {
@@ -83,13 +82,6 @@ public class Conductor {
         return telefono;
     }
 
-    public UUID getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(UUID codigo) {
-        this.codigo = codigo;
-    }
 
     public List<Horario> getHorarioConductores() {
         return horarioConductores;
