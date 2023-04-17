@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 public class Horario {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @ManyToOne
