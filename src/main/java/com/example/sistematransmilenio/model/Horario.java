@@ -121,4 +121,19 @@ public class Horario {
     public void setRutaHorario(Ruta rutaHorario) {
         this.rutaHorario = rutaHorario;
     }
+
+    @Override
+    public String toString() {
+        return "Horario{" +
+                "id=" + id +
+                ", busHorario=" + busHorario +
+                ", conductorHorario=" + conductorHorario +
+                ", rutaHorario=" + rutaHorario +
+                ", diasSemana=" + diasSemana +
+                ", horaInicio=" + horaInicio +
+                ", horaFin=" + horaFin +
+                ", horaInicioStr='" + horaInicioStr + '\'' +
+                ", horaFinStr='" + horaFinStr + '\'' +
+                '}';
+    }
 }
