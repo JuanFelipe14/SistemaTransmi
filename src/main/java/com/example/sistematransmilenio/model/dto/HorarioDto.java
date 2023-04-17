@@ -19,7 +19,10 @@ public class HorarioDto {
 
     private String horaFinStr;
 
-    public HorarioDto(Long id, String busHorario, String conductorHorario, Long idConductorHorario, DiasSemana diasSemana, String horaInicioStr, String horaFinStr,String rutaHorario, Long idRutaHorario) {
+    public HorarioDto() {
+    }
+
+    public HorarioDto(Long id, String busHorario, String conductorHorario, Long idConductorHorario, DiasSemana diasSemana, String horaInicioStr, String horaFinStr, String rutaHorario, Long idRutaHorario) {
         this.rutaHorario= rutaHorario;
         this.idRutaHorario=idRutaHorario;
         this.id = id;

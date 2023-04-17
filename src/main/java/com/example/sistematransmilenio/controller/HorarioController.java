@@ -26,7 +26,7 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("/horario")
-public class HorarioController{
+public class HorarioController {
 
     @Autowired
     HorarioService horarioService;
@@ -48,7 +48,7 @@ public class HorarioController{
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/view/{id}")
-    public HorarioDto verHorario( @PathVariable("id") Long id) {
+    public HorarioDto verHorario(@PathVariable("id") Long id) {
         HorarioDto horarioRetorno = horarioService.findHorarioDtoById(id);
         return horarioRetorno;
     }
@@ -56,71 +56,31 @@ public class HorarioController{
     @CrossOrigin("http://localhost:4200")
     @PostMapping(value = "/add")
     public HorarioDto agregarHorario(@Valid @RequestBody HorarioDto horario) {
+
         Horario horarioSave = horarioService.horarioDtoToHorario(horario);
         System.out.println(horario.toString());
         System.out.println(horarioSave.toString());
         horarioSave.setId(-1L);
         horarioSave = horarioService.save(horarioSave);
+        if(horarioSave == null){
+            HorarioDto horarioRetorno = new HorarioDto();
+            horarioRetorno.setConductorHorario("");
+            return horarioRetorno;
+        }
         HorarioDto horarioRetorno = horarioService.horarioToHorarioDto(horarioSave);
         return horarioRetorno;
+
+
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping( "/save")
+    @GetMapping("/save")
     public String guardarHorario(@Valid Horario horario, BindingResult result, Model model) {
-        model.addAttribute("conductores",conductorService.listarConductores());
-        model.addAttribute("buses",busService.listarBuses());
-        model.addAttribute("rutas",rutaService.listarRutas());
+        model.addAttribute("conductores", conductorService.listarConductores());
+        model.addAttribute("buses", busService.listarBuses());
+        model.addAttribute("rutas", rutaService.listarRutas());
         model.addAttribute("diasSemana", DiasSemana.values());
         return "horario-add";
     }
-
-    /* TODO
-    @PostMapping("/procesarHorarioCreado")
-    public String procesarFormulario(@RequestParam("dropConducs") String dropConducs,@RequestParam("dropBuses") String dropBuses,@RequestParam("dropRutas") String dropRutas,@RequestParam("dropDias") String dropDias,@RequestParam("horaInicio") String horaInicio,@RequestParam("horaFin") String horaFin, Model model) {
-        Horario horario = new Horario();
-        System.out.println("DROP____:"+dropConducs);
-        horario.setDiasSemana(DiasSemana.valueOf(dropDias));
-        horario.setConductorHorario(conductorService.findConductorByCedula(Integer.valueOf(dropConducs)));
-        horario.setRutaHorario(rutaService.findRutaByNombreRuta(dropRutas));
-        horario.setBusHorario(busService.findBusByPlaca(dropBuses));
-        horario.setHoraInicioStr(horaInicio);
-        horario.setHoraFinStr(horaFin);
-        busService.findBusByPlaca(dropBuses).getHorarioBus().add(horario);
-        busService.guardarBus(busService.findBusByPlaca(dropBuses));
-        conductorService.findConductorByCedula(Integer.valueOf(dropConducs)).getHorarioConductores().add(horario);
-        conductorService.guardarConductor(conductorService.findConductorByCedula(Integer.valueOf(dropConducs)));
-        rutaService.findRutaByNombreRuta(dropRutas).getHorarioRuta().add(horario);
-        rutaService.findRutaByNombreRuta(dropRutas).setId(new Random(1000).nextLong());
-        rutaService.guardarRuta(rutaService.findRutaByNombreRuta(dropRutas));
-
-        horarioService.guardarHorario(horario);
-        return "Bienvenida";
-    }
-
-    /*
-@PostMapping("/procesarHorarioCreado")
-@Transactional
-public String procesarFormulario(@ModelAttribute("conductores") Conductor dropConducs, @ModelAttribute("buses") Bus dropBuses, @ModelAttribute("rutas") Ruta dropRutas, @ModelAttribute("dropDias")  String dropDias, @RequestParam("horaInicio") String horaInicio, @RequestParam("horaFin") String horaFin, Model model,HttpServletRequest request) {
-    Horario horario = new Horario();
-    String selectedValue = request.getParameter("mySelect");
-    System.out.println("DROP:"+dropBuses);
-    horario.setDiasSemana(DiasSemana.valueOf(dropDias));
-    horario.setConductorHorario(dropConducs);
-    horario.setRutaHorario(dropRutas);
-    horario.setBusHorario(dropBuses);
-    horario.setHoraInicioStr(horaInicio);
-    horario.setHoraFinStr(horaFin);
-    dropBuses.getHorarioBus().add(horario);
-    busService.guardarBus(dropBuses);
-    dropConducs.getHorarioConductores().add(horario);
-    conductorService.guardarConductor(dropConducs);
-    dropRutas.getHorarioRuta().add(horario);
-    dropRutas.setId(new Random(1000).nextLong());
-    rutaService.guardarRuta(dropRutas);
-
-    horarioService.guardarHorario(horario);
-    return "Bienvenida";
-}*/
 
 }

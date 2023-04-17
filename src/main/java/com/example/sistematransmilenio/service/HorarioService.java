@@ -104,6 +104,27 @@ public class HorarioService {
     }
 
     public Horario save(Horario horarioSave) {
-        return this.horarioRepository.save(horarioSave);
+        if(this.validarBuses(horarioSave)){
+            return this.horarioRepository.save(horarioSave);
+        }else
+            return null;
+
+    }
+
+    private boolean validarBuses(Horario horarioSave) {
+        List<Horario> horariosBus = new ArrayList<>();
+        for(Horario h:listHorarios()){
+            if(h.getBusHorario().getPlaca().equals(horarioSave.getBusHorario().getPlaca())){
+                horariosBus.add(h);
+            }
+        }
+        for(Horario h:horariosBus){
+            if(h.getDiasSemana().equals(horarioSave.getDiasSemana())){
+                if(Integer.parseInt(h.getHoraFinStr()) > Integer.parseInt(horarioSave.getHoraInicioStr())&&Integer.parseInt(h.getHoraInicioStr())<Integer.parseInt(horarioSave.getHoraFinStr())){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

@@ -629,3 +629,11 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/juanf/O
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 57 more
+2023-04-17 12:12:15 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]CONDUCTOR"; se esperaba "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT"
+Syntax error in SQL statement "[*]CONDUCTOR"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT"; SQL statement:
+CONDUCTOR [42001-214]
+2023-04-17 12:12:16 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]CONDUCTOR"; se esperaba "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT"
+Syntax error in SQL statement "[*]CONDUCTOR"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT"; SQL statement:
+CONDUCTOR [42001-214]
