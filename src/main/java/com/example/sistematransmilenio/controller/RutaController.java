@@ -50,5 +50,20 @@ public class RutaController {
         return rutaRetorno;
     }
 
+    @CrossOrigin("http://localhost:4200/")
+    @PutMapping("/edit")
+    public RutaDto modificarRuta(@Valid @RequestBody RutaDto ruta) {
+        //Ruta rutaAnterior = rutaService.findById(ruta.getId());
+        System.out.println(ruta.toString());
+        Ruta rutaAux = rutaService.rutaDtoToRuta(ruta);
+        System.out.println(rutaAux.toString());
+
+        //rutaAnterior.setEstaciones(rutaAux.getEstaciones());
+        Ruta rutaSave=rutaService.update(rutaAux);
+        RutaDto rutaRetorno = rutaService.rutaToRutaDto(rutaSave);
+        return  rutaRetorno;
+    }
+
+
 
 }

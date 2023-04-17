@@ -36,4 +36,13 @@ public class RutaDto {
     public void setEstaciones(List<String> estaciones) {
         this.estaciones = estaciones;
     }
+
+    @Override
+    public String toString() {
+        return "RutaDto{" +
+                "id=" + id +
+                ", nombreRuta='" + nombreRuta + '\'' +
+                ", estaciones=" + estaciones +
+                '}';
+    }
 }

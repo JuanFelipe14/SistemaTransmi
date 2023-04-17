@@ -59,11 +59,19 @@ public class RutaService {
             Estacion estacion = estacionService.findEstacionByNombre(s);
             rutaRetorno.getEstaciones().add(estacion);
         }
-        rutaRetorno.setId(-1l);
+        rutaRetorno.setId(rutaDto.getId());
         return rutaRetorno;
     }
 
     public Ruta save(Ruta rutaNueva) {
         return this.rutaRepository.save(rutaNueva);
+    }
+
+    public Ruta findById(Long id) {
+        return rutaRepository.findById(id).get();
+    }
+
+    public Ruta update(Ruta rutaAnterior) {
+        return rutaRepository.save(rutaAnterior);
     }
 }

@@ -20,7 +20,6 @@ public class Horario {
     @ManyToOne
     private Ruta rutaHorario;
 
-    private UUID idHorario;
 
     private DiasSemana diasSemana;
     private Date horaInicio;
@@ -41,14 +40,6 @@ public class Horario {
 
     public void setDiasSemana(DiasSemana diasSemana) {
         this.diasSemana = diasSemana;
-    }
-
-    public UUID getIdHorario() {
-        return idHorario;
-    }
-
-    public void setIdHorario(UUID idHorario) {
-        this.idHorario = idHorario;
     }
 
     public Date getHoraInicio() {
@@ -85,24 +76,24 @@ public class Horario {
         this.horaFinStr = horaFinStr;
     }
 
-    public Horario() {
-        idHorario=UUID.randomUUID();
-    }
 
-    public Horario(Bus busHorario, Conductor conductorHorario, Ruta rutaHorario, UUID idHorario, ArrayList<DiasSemana> diasHorario, Date horaFin, Date horaInicio) {
+
+    public Horario(Bus busHorario, Conductor conductorHorario, Ruta rutaHorario,DiasSemana diasHorario, Date horaFin, Date horaInicio) {
         this.busHorario = busHorario;
         this.conductorHorario = conductorHorario;
         this.rutaHorario = rutaHorario;
-        this.idHorario = idHorario;
+        this.diasSemana=diasHorario;
         this.horaFin=horaFin;
         this.horaInicio=horaInicio;
     }
+    //TODO constructor para crear fechas a partir de str
 
-    public Horario(Bus busHorario, Conductor conductorHorario, Ruta rutaHorario,  ArrayList<DiasSemana> diasHorario,Date horaFin,Date horaInicio) {
+    public Horario(){}
+    public Horario(Bus busHorario, Conductor conductorHorario, Ruta rutaHorario, DiasSemana diasHorario,String horaFinStr,String horaInicioStr) {
         this.busHorario = busHorario;
         this.conductorHorario = conductorHorario;
         this.rutaHorario = rutaHorario;
-        idHorario=UUID.randomUUID();
+
         this.horaFin=horaFin;
         this.horaInicio=horaInicio;
     }
