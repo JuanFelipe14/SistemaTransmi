@@ -87,6 +87,7 @@ public class HorarioService {
         horarioReturn.setRutaHorario(rutaService.findById(horario.getIdRutaHorario()));
         horarioReturn.setBusHorario(busService.findBusByPlaca(horario.getBusHorario()));
         horarioReturn.setDiasSemana(horario.getDiasSemana());
+        horarioReturn.setId(horario.getId());
         Calendar cal = Calendar.getInstance();
         cal.set(0,0,0,0,0,0);
 
@@ -105,5 +106,18 @@ public class HorarioService {
 
     public Horario save(Horario horarioSave) {
         return this.horarioRepository.save(horarioSave);
+    }
+
+    public Horario update(Horario horarioSave) {
+        return this.horarioRepository.save(horarioSave);
+    }
+
+    public boolean eliminarHorario(Long id) {
+        try{
+            this.horarioRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

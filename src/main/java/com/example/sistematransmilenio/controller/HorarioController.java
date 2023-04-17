@@ -75,6 +75,23 @@ public class HorarioController{
         return "horario-add";
     }
 
+    @CrossOrigin("http://localhost:4200/")
+    @PutMapping("/edit")
+    public HorarioDto modificarBus(@Valid @RequestBody HorarioDto horario){
+        Horario horarioSave = horarioService.horarioDtoToHorario(horario);
+        System.out.println(horario.toString());
+        System.out.println(horarioSave.toString());
+        horarioSave = horarioService.update(horarioSave);
+        HorarioDto horarioRetorno = horarioService.horarioToHorarioDto(horarioSave);
+        return horarioRetorno;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping(value = "/delete/{id}")
+    public boolean eliminarHorario(@PathVariable Long id) {
+        return horarioService.eliminarHorario(id);
+    }
+
     /* TODO
     @PostMapping("/procesarHorarioCreado")
     public String procesarFormulario(@RequestParam("dropConducs") String dropConducs,@RequestParam("dropBuses") String dropBuses,@RequestParam("dropRutas") String dropRutas,@RequestParam("dropDias") String dropDias,@RequestParam("horaInicio") String horaInicio,@RequestParam("horaFin") String horaFin, Model model) {
