@@ -82,7 +82,7 @@ public class RutaService {
 
     public boolean eliminarRuta(Long id) {
         if(this.validarRuta(id)){
-            //rutaRepository.deleteById(id);
+            rutaRepository.deleteById(id);
             return true;
         }else{
             return false;

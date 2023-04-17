@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface HorarioRepository extends JpaRepository<Horario, Long> {
 
-    @Query(value = "select h FROM Horario h INNER JOIN Ruta r ON h.rutaHorario = r INNER JOIN Bus b ON h.busHorario = b")
+    @Query(value = "select h FROM Horario h INNER JOIN Ruta r ON h.rutaHorario = r INNER JOIN Bus b ON h.busHorario = b Where r.id=:id")
     List<Horario> getHorarioByRutaWithBus(Long id);
 }
