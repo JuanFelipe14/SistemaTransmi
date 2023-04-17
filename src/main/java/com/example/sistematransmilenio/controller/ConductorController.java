@@ -1,6 +1,7 @@
 package com.example.sistematransmilenio.controller;
 
 import com.example.sistematransmilenio.model.Conductor;
+import com.example.sistematransmilenio.model.dto.ConductorDto;
 import com.example.sistematransmilenio.service.ConductorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,19 +40,26 @@ public class ConductorController {
         return "redirect:/conductor/list";
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/view/{idConductor}")
-    String verConductor(Model model, @PathVariable("idConductor") Long id) {
-        Conductor conductor = conductorService.recuperarConductor(id);
-        model.addAttribute("conductor", conductor);
-        return "conductor-view";
+    public ConductorDto verConductor( @PathVariable("idConductor") Long id) {
+        return conductorService.conductorToConductorDto(conductorService.recuperarConductor(id));
     }
 
-    @GetMapping("/edit-form/{id}")
-    public String formularioEditarConductor(Model model, @PathVariable Long id) {
-        Conductor c = conductorService.recuperarConductor(id);
-        model.addAttribute("conductor", c);
-        return "conductor-edit";
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/edit")
+    public ConductorDto modificarConductor(@Valid @RequestBody ConductorDto conductor) {
+        Conductor conductorAnterior = (Conductor) conductorService.findById(conductor.getId());
+        conductorAnterior.setNombre(conductor.getNombre());
+        conductorAnterior.setCedula(conductor.getCedula());
+        conductorAnterior.setTelefono(conductor.getTelefono());
+        conductorAnterior.setDireccion(conductor.getDireccion());
+        Conductor conductorSave = conductorService.guardarConductor(conductorAnterior);
+        ConductorDto conductorRetorno = new ConductorDto(conductorSave.getId(),conductorSave.getNombre(),conductorSave.getCedula(),conductorSave.getTelefono(),conductorSave.getDireccion());
+        return conductorRetorno;
     }
+
+
 
     @GetMapping("/search")
     public String listConductores(@RequestParam(required = false) String searchText, Model model) {
@@ -68,17 +76,28 @@ public class ConductorController {
     }
 
 
-    @GetMapping(value = "/add")
-    public String agregarConductor(Model model) {
-        Conductor c= new Conductor();
-        model.addAttribute("conductor", c);
-        return "conductor-add";
+    @CrossOrigin("http://localhost:4200")
+    @PostMapping(value = "/add")
+    public ConductorDto agregarConductor(@Valid @RequestBody ConductorDto conductor) {
+        Conductor conductorNuevo = new Conductor();
+        conductorNuevo.setNombre(conductor.getNombre());
+        conductorNuevo.setCedula(conductor.getCedula());
+        conductorNuevo.setTelefono(conductor.getTelefono());
+        conductorNuevo.setDireccion(conductor.getDireccion());
+        conductorNuevo = conductorService.guardarConductor(conductorNuevo);
+        ConductorDto conductorRetorno = new ConductorDto(conductorNuevo.getId(),conductorNuevo.getNombre(),conductorNuevo.getCedula(),conductorNuevo.getTelefono(),conductorNuevo.getDireccion());
+        return conductorRetorno;
     }
-
-    @GetMapping(value = "/delete/{id}")
-    public String eliminarConductor(@PathVariable Long id) {
-        conductorService.eliminarConductor(id);
-        return "redirect:/conductor/list";
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping( "/delete/{id}")
+    public boolean eliminarConductor(@PathVariable Long id) {
+        try{
+            conductorService.eliminarConductor(id);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

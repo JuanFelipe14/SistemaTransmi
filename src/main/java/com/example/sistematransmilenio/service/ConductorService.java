@@ -1,6 +1,8 @@
 package com.example.sistematransmilenio.service;
 
 import com.example.sistematransmilenio.model.Conductor;
+import com.example.sistematransmilenio.model.dto.ConductorDto;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.sistematransmilenio.repository.ConductorRepository;
@@ -19,8 +21,8 @@ public class ConductorService {
     public Conductor recuperarConductor(Long id) { return  conductorRepository.findById(id).get();
     }
 
-    public void guardarConductor(Conductor conductor) {
-        conductorRepository.save(conductor);
+    public Conductor guardarConductor(Conductor conductor) {
+        return conductorRepository.save(conductor);
     }
 
     public Conductor findConductorByCedula(int cedula){
@@ -33,5 +35,13 @@ public class ConductorService {
 
     public void eliminarConductor(long id ){
         conductorRepository.deleteById(id);
+    }
+
+    public Conductor findById(Long id) {
+        return this.conductorRepository.findById(id).get();
+    }
+
+    public ConductorDto conductorToConductorDto(Conductor conductor) {
+        return new ConductorDto(conductor.getId(),conductor.getNombre(),conductor.getCedula(),conductor.getTelefono(),conductor.getDireccion());
     }
 }
