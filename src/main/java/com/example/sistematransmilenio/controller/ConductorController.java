@@ -14,7 +14,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Controller
+@RestController
 @RequestMapping("/conductor")
 public class ConductorController {
     private ArrayList<Conductor> conductores;
@@ -23,11 +23,11 @@ public class ConductorController {
     @Autowired
     private ConductorService conductorService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/list")
-    public String listarConductores(Model model) {
+    public List<Conductor> listarConductores() {
         List<Conductor> conductor = conductorService.listarConductores();
-        model.addAttribute("conductor", conductor);
-        return "conductor-list";
+        return conductor;
     }
 
     @PostMapping(value = "/save")

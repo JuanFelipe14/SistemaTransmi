@@ -2,6 +2,7 @@ package com.example.sistematransmilenio.controller;
 
 import com.example.sistematransmilenio.model.Bus;
 import com.example.sistematransmilenio.model.Conductor;
+import com.example.sistematransmilenio.model.dto.BusDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,15 @@ public class BusController {
         return bus;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/edit-form/{id}")
-    public String formularioEditarBus(Model model, @PathVariable Long id) {
-        Bus b = busService.recuperarBus(id);
-        model.addAttribute("bus", b);
-        return "bus-edit";
+    @CrossOrigin("http://localhost:4200/")
+    @PutMapping("/edit")
+    public BusDto modificarBus(@Valid @RequestBody BusDto bus){
+        Bus busAnterior = busService.findBusByPlaca(bus.getPlaca());
+        busAnterior.setModelo(bus.getModelo());
+        busAnterior.setPlaca(bus.getPlaca());
+        Bus busSave = busService.update(busAnterior);
+        BusDto busRetorno = new BusDto(busSave.getId(),busSave.getPlaca(),busSave.getModelo());
+        return busRetorno;
     }
 
 
@@ -76,11 +80,15 @@ public class BusController {
     }
 
 
-    @GetMapping(value = "/add")
-    public String agregarBus(Model model) {
-        Bus b= new Bus();
-        model.addAttribute("bus", b);
-        return "bus-add";
+    @CrossOrigin("http://localhost:4200")
+    @PostMapping(value = "/add")
+    public BusDto agregarBus(@Valid @RequestBody BusDto bus) {
+        Bus nuevoBus = new Bus();
+        nuevoBus.setPlaca(bus.getPlaca());
+        nuevoBus.setModelo(bus.getModelo());
+        nuevoBus = busService.save(nuevoBus);
+        BusDto busRetorno = new BusDto(nuevoBus.getId(),nuevoBus.getPlaca(),nuevoBus.getModelo());
+        return busRetorno;
     }
 
     @GetMapping(value = "/delete/{id}")

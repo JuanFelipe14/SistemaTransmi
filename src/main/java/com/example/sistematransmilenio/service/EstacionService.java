@@ -3,7 +3,6 @@ package com.example.sistematransmilenio.service;
 import com.example.sistematransmilenio.model.Estacion;
 import com.example.sistematransmilenio.model.dto.EstacionDto;
 import com.example.sistematransmilenio.repository.EstacionRepository;
-import com.example.sistematransmilenio.repository.HorarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +30,14 @@ public class EstacionService {
         return nuevasEstaciones;
     }
 
-    public void eliminarEstacion(long id) {
-        estacionRepository.deleteById(id);
+    public boolean eliminarEstacion(long id) {
+        try{
+            estacionRepository.deleteById(id);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+
     }
 
     public Estacion findEstacionById(Long id) {
@@ -41,5 +46,13 @@ public class EstacionService {
 
     public Estacion update(Estacion estacion) {
         return estacionRepository.save(estacion);
+    }
+
+    public Estacion save(Estacion estacionNueva) {
+        return estacionRepository.save(estacionNueva);
+    }
+
+    public Estacion findEstacionByNombre(String s) {
+        return estacionRepository.findByNombre(s);
     }
 }
