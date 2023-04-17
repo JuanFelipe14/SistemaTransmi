@@ -56,13 +56,21 @@ public class HorarioController{
     @CrossOrigin("http://localhost:4200")
     @PostMapping(value = "/add")
     public HorarioDto agregarHorario(@Valid @RequestBody HorarioDto horario) {
+
         Horario horarioSave = horarioService.horarioDtoToHorario(horario);
         System.out.println(horario.toString());
         System.out.println(horarioSave.toString());
         horarioSave.setId(-1L);
         horarioSave = horarioService.save(horarioSave);
+        if(horarioSave == null){
+            HorarioDto horarioRetorno = new HorarioDto();
+            horarioRetorno.setConductorHorario("");
+            return horarioRetorno;
+        }
         HorarioDto horarioRetorno = horarioService.horarioToHorarioDto(horarioSave);
         return horarioRetorno;
+
+
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
