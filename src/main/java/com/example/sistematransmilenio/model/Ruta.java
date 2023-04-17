@@ -70,5 +70,15 @@ public class Ruta {
     public void setHorarioRuta(List<Horario> horarioRuta) {
         this.horarioRuta = horarioRuta;
     }
+
+    @Override
+    public String toString() {
+        return "Ruta{" +
+                "id=" + id +
+                ", nombreRuta='" + nombreRuta + '\'' +
+                ", estaciones=" + estaciones +
+                ", horarioRuta=" + horarioRuta +
+                '}';
+    }
 }
 
