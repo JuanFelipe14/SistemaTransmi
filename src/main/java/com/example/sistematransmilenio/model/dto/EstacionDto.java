@@ -4,9 +4,20 @@ public class EstacionDto {
     private long id;
     private String nombre;
 
-    public EstacionDto(long id, String nombre) {
+    private Long mapKey;
+
+    public EstacionDto(long id, String nombre, Long mapKey) {
         this.id = id;
         this.nombre = nombre;
+        this.mapKey = mapKey;
+    }
+
+    public Long getMapKey() {
+        return mapKey;
+    }
+
+    public void setMapKey(Long mapKey) {
+        this.mapKey = mapKey;
     }
 
     public long getId() {

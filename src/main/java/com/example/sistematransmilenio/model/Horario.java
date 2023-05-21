@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 public class Horario {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @ManyToOne
@@ -120,5 +120,20 @@ public class Horario {
 
     public void setRutaHorario(Ruta rutaHorario) {
         this.rutaHorario = rutaHorario;
+    }
+
+    @Override
+    public String toString() {
+        return "Horario{" +
+                "id=" + id +
+                ", busHorario=" + busHorario +
+                ", conductorHorario=" + conductorHorario +
+                ", rutaHorario=" + rutaHorario +
+                ", diasSemana=" + diasSemana +
+                ", horaInicio=" + horaInicio +
+                ", horaFin=" + horaFin +
+                ", horaInicioStr='" + horaInicioStr + '\'' +
+                ", horaFinStr='" + horaFinStr + '\'' +
+                '}';
     }
 }
