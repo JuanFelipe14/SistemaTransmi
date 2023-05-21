@@ -1,4 +1,4 @@
-package com.example.sistematransmilenio.Database;
+package com.example.sistematransmilenio.model.Database;
 
 import com.example.sistematransmilenio.Enumeration.DiasSemana;
 import com.example.sistematransmilenio.model.*;

@@ -35,7 +35,7 @@ public class EstacionController {
     @GetMapping("/view/{idEstacion}")
     public EstacionDto findEstacionById(Model model, @PathVariable("idEstacion") Long id) {
         Estacion estacion = estacionService.findEstacionById(id);
-        EstacionDto estacionEnvio =  new EstacionDto(estacion.getId(),estacion.getNombre());
+        EstacionDto estacionEnvio =  new EstacionDto(estacion.getId(),estacion.getNombre(),estacion.getMapKeyNumber());
         return estacionEnvio;
     }
 
@@ -44,8 +44,9 @@ public class EstacionController {
     public EstacionDto modificarEstacion(@Valid @RequestBody EstacionDto estacion) {
         Estacion estacionAnterior = estacionService.findEstacionById(estacion.getId());
         estacionAnterior.setNombre(estacion.getNombre());
+        estacionAnterior.setMapKeyNumber(estacion.getMapKey());
         Estacion estacionSave=estacionService.update(estacionAnterior);
-        EstacionDto estacionRetorno = new EstacionDto(estacionSave.getId(), estacionSave.getNombre());
+        EstacionDto estacionRetorno = new EstacionDto(estacionSave.getId(), estacionSave.getNombre(),estacionSave.getMapKeyNumber());
         return  estacionRetorno;
     }
 
@@ -54,8 +55,9 @@ public class EstacionController {
     public EstacionDto agregarEstacion(@Valid @RequestBody EstacionDto estacion) {
         Estacion estacionNueva = new Estacion();
         estacionNueva.setNombre(estacion.getNombre());
+        estacionNueva.setMapKeyNumber(estacion.getMapKey());
         estacionNueva = estacionService.save(estacionNueva);
-        EstacionDto estacionRetorno = new EstacionDto(estacionNueva.getId(),estacionNueva.getNombre());
+        EstacionDto estacionRetorno = new EstacionDto(estacionNueva.getId(),estacionNueva.getNombre(),estacionNueva.getMapKeyNumber());
         return estacionRetorno;
     }
 

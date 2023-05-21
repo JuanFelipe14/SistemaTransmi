@@ -23,7 +23,8 @@ public class EstacionService {
         for(Estacion e: this.listarEstaciones()){
             EstacionDto nuevaEstacion= new EstacionDto(
                     e.getId(),
-                    e.getNombre()
+                    e.getNombre(),
+                    e.getMapKeyNumber()
             );
             nuevasEstaciones.add(nuevaEstacion);
         }
@@ -32,7 +33,18 @@ public class EstacionService {
 
     public boolean eliminarEstacion(long id) {
         try{
+            Estacion estacionNueva = this.findEstacionById(id);
+            List<Estacion> estaciones = this.listarEstaciones();
+            for(Estacion est: estaciones){
+                if(est.getMapKeyNumber() > estacionNueva.getMapKeyNumber()){
+                    est.setMapKeyNumber(est.getMapKeyNumber()-1);
+                    estacionRepository.save(est);
+                }
+            }
+
             estacionRepository.deleteById(id);
+
+
         }catch (Exception e){
             return false;
         }
@@ -49,6 +61,15 @@ public class EstacionService {
     }
 
     public Estacion save(Estacion estacionNueva) {
+        boolean encontrado = false;
+        List<Estacion> estaciones = this.listarEstaciones();
+        for(Estacion est: estaciones){
+            if(est.getMapKeyNumber() >= estacionNueva.getMapKeyNumber()){
+                est.setMapKeyNumber(est.getMapKeyNumber()+1);
+                estacionRepository.save(est);
+            }
+        }
+
         return estacionRepository.save(estacionNueva);
     }
 
