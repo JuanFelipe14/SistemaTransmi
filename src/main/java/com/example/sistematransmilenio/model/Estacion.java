@@ -15,6 +15,8 @@ public class Estacion {
     @NotNull(message = "no puede ser nulo")
     private String nombre;
 
+    private Long mapKeyNumber;
+
     @ManyToMany(mappedBy = "estaciones")
     private List<Ruta> rutas = new ArrayList<>();
 
@@ -42,7 +44,13 @@ public class Estacion {
         this.rutas = rutas;
     }
 
+    public Long getMapKeyNumber() {
+        return mapKeyNumber;
+    }
 
+    public void setMapKeyNumber(Long mapKeyNumber) {
+        this.mapKeyNumber = mapKeyNumber;
+    }
 
     public Estacion() {
     }
@@ -51,4 +59,11 @@ public class Estacion {
     public Estacion(String nombre) {
         this.nombre = nombre;
     }
+
+    public Estacion(String nombre, Long mapKeyNumber) {
+        this.nombre = nombre;
+        this.mapKeyNumber = mapKeyNumber;
+    }
+
+
 }

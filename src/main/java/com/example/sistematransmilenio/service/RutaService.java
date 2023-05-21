@@ -32,7 +32,7 @@ public class RutaService {
     public RutaDto rutaToRutaDto(Ruta ruta){
         List<String> estaciones = new ArrayList<>();
         for(Estacion estacion: ruta.getEstaciones()){
-            String nuevaEstacion = new EstacionDto(estacion.getId(),estacion.getNombre()).getNombre();
+            String nuevaEstacion = new EstacionDto(estacion.getId(),estacion.getNombre(), estacion.getMapKeyNumber()).getNombre();
             estaciones.add(nuevaEstacion);
         }
         return new RutaDto(ruta.getId(),ruta.getNombreRuta(),estaciones);
@@ -69,6 +69,14 @@ public class RutaService {
     }
 
     public Ruta save(Ruta rutaNueva) {
+        Estacion es1 = rutaNueva.getEstaciones().get(0);
+        for(Estacion es: rutaNueva.getEstaciones()){
+            Long dif= Math.abs(es1.getMapKeyNumber() - es.getMapKeyNumber());
+            if(dif>1){
+                return new Ruta();
+            }
+            es1 =es;
+        }
         return this.rutaRepository.save(rutaNueva);
     }
 
